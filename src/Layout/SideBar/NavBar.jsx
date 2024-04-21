@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import './SideBar.css';
 import { IconContext } from "react-icons";
@@ -9,8 +9,16 @@ import Logo from '../../assets/LogoHome.png';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
+  const navigate = useNavigate();  // Hook for navigation
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.clear(); // This clears the local storage entirely
+    navigate("/");        // Navigate to home or login page
+    showSidebar();        // Optionally close the sidebar if open
+  };
 
   return (
     <>
@@ -20,7 +28,7 @@ function Navbar() {
           <Link to="#" className="menu-bars absolute left-4" onClick={showSidebar}>
             <FaIcons.FaBars />
           </Link>
-          <img src={Logo} alt="Descriptive Alt Text" className="w-30 h-20" />
+          <img src={Logo} alt="Logo" className="w-30 h-20" />
           <div className="icon-container absolute top-7 right-10 flex items-center space-x-4">
             <FaIcons.FaHeart className="text-2xl" />
             <FaIcons.FaUser className="text-2xl"/>
@@ -33,10 +41,10 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            <img src={Logo} className="w-30 h-20 ml-20"></img>
+            <img src={Logo} alt="Logo" className="w-30 h-20 ml-20" />
             {SidebarData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
+                <li key={index} className={item.cName} onClick={item.title === "Log Out" ? handleLogout : null}>
                   <Link to={item.path}>
                     {item.icon}
                     <span>{item.title}</span>

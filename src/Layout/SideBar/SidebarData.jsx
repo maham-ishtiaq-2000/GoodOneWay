@@ -50,7 +50,7 @@ export const SidebarData = [
   },
   {
     title: "Log Out",
-    path: "/support",
+    path: "/",
     icon: <IoMdExit />,
     cName: "nav-text",
   },
