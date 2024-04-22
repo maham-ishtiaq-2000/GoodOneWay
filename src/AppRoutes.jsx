@@ -1,8 +1,10 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
-import Home from './pages/Home';
+import Home from './Layout/Categories/Home';
 import Brand from './Layout/Categories/Brand';
+import Categories from "./Layout/Categories/Categories";
+import Cart from './Layout/Categories/Cart';
 
 // ProtectedRoute component
 const ProtectedRoute = ({ children }) => {
@@ -30,7 +32,17 @@ const AppRoutes = () => {
                     <Brand />
                 </ProtectedRoute>
             } />
-            {/* Add other protected routes as needed */}
+            <Route path="/categories" element={
+                <ProtectedRoute>
+                    <Categories />
+                </ProtectedRoute>
+            } />
+              <Route path="/cart" element={
+                <ProtectedRoute>
+                    <Cart />
+                </ProtectedRoute>
+            } />
+            
         </Routes>
     );
 };

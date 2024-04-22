@@ -14,6 +14,9 @@ module.exports = {
         "homePageColor" : "#fefbff",
         "white" : "#ffffff",
         "lightGray" : "#d4d4d4"
+      },
+      fontSize: {
+        xxs: '0.85rem' // This is approximately 12px; adjust as needed
       }
     },
   },

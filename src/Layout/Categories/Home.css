@@ -1,0 +1,6 @@
+@media (min-width: 1440px) { /* Example for screens wider than 1440px */
+    .custom-fullscreen-image {
+        width: 100%; /* Override other width settings */
+        height: auto; /* Maintain aspect ratio */
+    }
+}

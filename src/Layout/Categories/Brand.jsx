@@ -5,22 +5,22 @@ import Footer from '../../Layout/Footer/Footer';
 import SingleBrand from '../ReusableComponent/SingleBrand';
 
 const Brand = () => {
-    const singleBrands = new Array(14).fill(null);
+    const singleBrands = new Array(30).fill(null);
 
     return (
         <>
             <div className='homePageColor'>
                 <SideBar></SideBar>
                 <div className="flex justify-center items-center w-full pl-7 pr-7 mb-5">
-                    <SearchBar></SearchBar>
+                    <SearchBar placeholderName="Search All Brands"></SearchBar>
                 </div>
-                {/* Responsive grid container */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 gap-y-10 p-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 gap-y-10 p-4 overflow-auto" style={{ height: '80vh' }}>
                     {singleBrands.map((_, index) => (
                         <SingleBrand key={index} />
                     ))}
                 </div>
-                <Footer></Footer>
+
+                <Footer formPage="brandPage"></Footer>
             </div>
         </>
     );

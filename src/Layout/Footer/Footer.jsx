@@ -1,37 +1,53 @@
 import React from 'react';
-import { FaCartArrowDown, FaHome, FaRegBuilding, FaSearch, FaTags } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { FaRegBuilding, FaTags, FaHome, FaSearch, FaCartArrowDown } from 'react-icons/fa';
 
-const Footer = () => {
+const Footer = ({formPage}) => {
+  console.log(formPage)
   const navigate = useNavigate();
+
+  const isActive = (path) => {
+    // This should match the path with the current location's pathname
+    // You would usually get this from the router's location context or similar
+    return window.location.pathname === path;
+  };
 
   return (
     <footer 
-      className="fixed inset-x-0 bottom-0 bg-white text-center py-2 md:py-4 lg:pl-40 lg:pr-40"
-      style={{ boxShadow: '0 -4px 5px -5px rgba(0, 0, 0, 0.1)' }}
-    >
-      <div className="flex flex-row md:flex-row justify-between items-center space-y-2 md:space-y-0">
+      className="fixed inset-x-0 bottom-0 bg-white text-center pb-2 md:py-4 w-full">
+       {!formPage && <div className="flex flex-col justify-center items-center pt-2 pb-1"
+             style={{ boxShadow: '0 -8px 10px -10px rgba(0, 0, 0, 0.3)' }}>
+            <p>
+                4 SKUs <span style={{ margin: '0 10px' }}>|</span> £155.00
+                <span style={{ margin: '0 2px', fontSize: '11px', position: 'relative', top: '-2px' }}>(Excl.Tax)</span>
+            </p>
+            <p className='text-sm text-gray mt-2'>Spend £145.00 more for Free Next Day Delivery</p>
+        </div>}
+
+      <div className="border-t border-gray w-full mb-2 pb-1"></div>
+
+      <div className="flex flex-row justify-between items-center lg:px-40">
         <button className="block" onClick={() => navigate('/brand')}>
-          <FaRegBuilding className="mx-auto w-10 h-5 ml-5 text-gray" style={{ display: 'block' }} />
-          <span className='text-sm text-gray font-semibold ml-5'>Brands</span>
+          <FaRegBuilding className={`ml-4 w-10 h-5 ${isActive('/brand') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
+          <span className={`text-sm font-semibold ${isActive('/brand') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Brands</span>
+        </button>
+        <button className="block" onClick={() => navigate('/categories')}>
+          <FaTags className={`mx-auto w-10 h-5 ${isActive('/categories') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
+          <span className={`text-sm font-semibold ${isActive('/categories') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Categories</span>
         </button>
         <button className="block" onClick={() => navigate('/home')}>
-          <FaTags className="mx-auto w-10 h-5 ml-5 text-gray" style={{ display: 'block' }} />
-          <span className='text-sm text-gray font-semibold'>Categories</span>
+          <FaHome className={`ml-3 w-10 h-5 ${isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
+          <span className={`text-sm font-semibold ${isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Home</span>
         </button>
-        <button className="block" onClick={() => navigate('/home')}>
-          <FaHome className="mx-auto w-10 h-5 ml-5 text-gray mr-2" style={{ display: 'block' }} />
-          <span className='text-sm text-gray font-semibold'>Home</span>
+        <button className="block" onClick={() => navigate('/search')}>
+          <FaSearch className={`mx-auto w-10 h-5 ${isActive('/search') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
+          <span className={`text-sm font-semibold ${isActive('/search') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Search</span>
         </button>
-        <button className="block" onClick={() => navigate('/home')}>
-          <FaSearch className="mx-auto w-10 h-5 ml-5 text-gray mr-2" style={{ display: 'block' }} />
-          <span className='text-sm text-gray font-semibold'>Search</span>
+        <button className="block" onClick={() => navigate('/cart')}>
+          <FaCartArrowDown className={`mx-auto w-10 h-5 ml-2 ${isActive('/cart') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
+          <span className={`text-sm font-semibold ${isActive('/cart') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Cart</span>
         </button>
-        <button className="block" onClick={() => navigate('/home')}>
-          <FaCartArrowDown className="mx-auto w-10 h-5 ml-5 text-gray mr-2" style={{ display: 'block' }} />
-          <span className='text-sm text-gray font-semibold'>Cart</span>
-        </button>
-      </div>
+      </div> 
     </footer>
   );
 };

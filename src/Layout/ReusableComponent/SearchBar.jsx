@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 
-const SearchBar = () => {
+const SearchBar = ({placeholderName}) => {
   const [searchValue, setSearchValue] = React.useState('');
 
   const handleSearchChange = (event) => {
@@ -19,7 +19,7 @@ const SearchBar = () => {
           <FaSearch className="absolute left-10 top-0 bottom-0 m-auto text-lg text-gray-500" />
           <input
             type="text"
-            placeholder="Search Available Brands"
+            placeholder={placeholderName}
             value={searchValue}
             onChange={handleSearchChange}
             className="w-full pl-20 pr-10 py-3 rounded-full text-grey bg-lightGray focus:outline-none"
