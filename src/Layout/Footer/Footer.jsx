@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { FaRegBuilding, FaTags, FaHome, FaSearch, FaCartArrowDown } from 'react-icons/fa';
 
 const Footer = ({formPage}) => {
-  console.log(formPage)
   const navigate = useNavigate();
 
   const isActive = (path) => {
@@ -39,7 +38,7 @@ const Footer = ({formPage}) => {
           <FaHome className={`ml-3 w-10 h-5 ${isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
           <span className={`text-sm font-semibold ${isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Home</span>
         </button>
-        <button className="block" onClick={() => navigate('/search')}>
+        <button className="block" onClick={() => navigate('/searchPage')}>
           <FaSearch className={`mx-auto w-10 h-5 ${isActive('/search') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
           <span className={`text-sm font-semibold ${isActive('/search') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Search</span>
         </button>

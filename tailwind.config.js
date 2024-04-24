@@ -17,6 +17,10 @@ module.exports = {
       },
       fontSize: {
         xxs: '0.85rem' // This is approximately 12px; adjust as needed
+      },
+      width: {
+        '95': '95%',
+        '5': '5%',
       }
     },
   },

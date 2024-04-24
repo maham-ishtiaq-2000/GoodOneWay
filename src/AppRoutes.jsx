@@ -5,6 +5,8 @@ import Home from './Layout/Categories/Home';
 import Brand from './Layout/Categories/Brand';
 import Categories from "./Layout/Categories/Categories";
 import Cart from './Layout/Categories/Cart';
+import SearchPage from "./Layout/Categories/SearchPage";
+
 
 // ProtectedRoute component
 const ProtectedRoute = ({ children }) => {
@@ -40,6 +42,11 @@ const AppRoutes = () => {
               <Route path="/cart" element={
                 <ProtectedRoute>
                     <Cart />
+                </ProtectedRoute>
+            } />
+             <Route path="/searchPage" element={
+                <ProtectedRoute>
+                    <SearchPage />
                 </ProtectedRoute>
             } />
             

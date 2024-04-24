@@ -1,0 +1,28 @@
+/* Slide in from bottom animation */
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%); /* Start from just below the screen */
+  }
+  100% {
+    transform: translateY(0); /* End at the bottom of the screen */
+  }
+}
+
+
+.modal-appear {
+  animation: 0.3s ease-out 0s 1 slideInFromBottom forwards; /* Add 'forwards' here */
+}
+
+/* Slide out to bottom animation */
+@keyframes slideOutToBottom {
+  0% {
+    transform: translateY(0); /* Start at the current position */
+  }
+  100% {
+    transform: translateY(100%); /* Slide down off the screen */
+  }
+}
+
+.modal-disappear {
+  animation: 0.3s ease-out 0s 1 slideOutToBottom forwards;
+}
