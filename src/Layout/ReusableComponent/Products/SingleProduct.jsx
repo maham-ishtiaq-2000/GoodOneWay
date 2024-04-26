@@ -40,8 +40,8 @@ const SingleProduct = ({ product }) => {
     const variants = product.variants.edges.map(edge => edge.node);
 
     return (
-        <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-2 relative" 
-        style={{ width: "200px", height: "350px", boxSizing: 'border-box' }}>
+        <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-1 relative" 
+        style={{ width: "180px", height: "350px", boxSizing: 'border-box' }}>
        <div className="w-full relative">
            <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
                {isLiked ? (
