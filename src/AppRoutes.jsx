@@ -44,7 +44,12 @@ const AppRoutes = () => {
                     <Cart />
                 </ProtectedRoute>
             } />
-             <Route path="/searchPage" element={
+             <Route path="/searchPage/:brand" element={
+                <ProtectedRoute>
+                    <SearchPage />
+                </ProtectedRoute>
+            } />
+            <Route path="/searchPage" element={
                 <ProtectedRoute>
                     <SearchPage />
                 </ProtectedRoute>

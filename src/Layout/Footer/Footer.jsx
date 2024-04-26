@@ -39,8 +39,8 @@ const Footer = ({formPage}) => {
           <span className={`text-sm font-semibold ${isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Home</span>
         </button>
         <button className="block" onClick={() => navigate('/searchPage')}>
-          <FaSearch className={`mx-auto w-10 h-5 ${isActive('/search') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
-          <span className={`text-sm font-semibold ${isActive('/search') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Search</span>
+          <FaSearch className={`w-10 h-5 ml-3 ${isActive('/searchPage') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />
+          <span className={`text-sm font-semibold ${isActive('/searchPage') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`}>Search</span>
         </button>
         <button className="block" onClick={() => navigate('/cart')}>
           <FaCartArrowDown className={`mx-auto w-10 h-5 ml-2 ${isActive('/cart') ? 'text-red-500 text-2xl font-bold' : 'text-gray'}`} />

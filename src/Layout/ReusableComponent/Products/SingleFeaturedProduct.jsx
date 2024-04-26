@@ -3,7 +3,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import SingleVariant from './SingleVariant';
 import './SingleProduct.css';
 
-const SingleProduct = ({ product }) => {
+const SingleFeaturedProduct = ({ product }) => {
     const [count, setCount] = useState(0);
     const increment = () => setCount(count + 1);
     const decrement = () => setCount(count > 0 ? count - 1 : 0);
@@ -36,8 +36,15 @@ const SingleProduct = ({ product }) => {
         }
     };
 
+    let variants;
     const modalClass = isClosing ? 'modal-disappear' : 'modal-appear';
-    const variants = product.variants.edges.map(edge => edge.node);
+    if(product.variants){
+        variants = product.variants.edges.map(edge => edge.node);
+    }
+    else{
+        console.log(variants)
+    }
+ 
 
     return (
         <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-2 relative" 
@@ -50,13 +57,13 @@ const SingleProduct = ({ product }) => {
                    <AiOutlineHeart size={24} color="red" onClick={() => setIsLiked(true)} />
                )}
            </div>
-           <img src={product.featuredImage.url} alt="Product" className='w-30 h-25' />
+           <img src={product.img} alt="Product" className='w-30 h-25' />
        </div>
        <div className="w-full text-center mb-2">
            <p className='text-xxs'>{product.title}</p>
-           <p className='text-md mt-8'>£{product.priceRange.maxVariantPrice.amount}<span style={{"fontSize": "10px"}} className='text-gray'>(Excl. Tax)</span></p>
+           <p className='text-md mt-8'>£{product.priceRange.minVariantPrice.amount}<span style={{"fontSize": "10px"}} className='text-gray'>(Excl. Tax)</span></p>
        </div>
-       {!variants || variants.length !== 1 && (
+       {variants && (
            <button
                className='bg-red-500 text-white rounded mt-2 py-1 mx-auto mt-1'
                onClick={toggleModal}
@@ -84,33 +91,35 @@ const SingleProduct = ({ product }) => {
                </div>
            </div>
        )}
-       {!variants || variants.length === 1 && (
-           <div className="flex items-center justify-center space-x-2 mt-1"  style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}
-           >
-               <button
-                   onClick={decrement}
-                   className="bg-red-500 text-white font-bold rounded px-4 h-7"
-                   type="button"
-               >
-                   -
-               </button>
-               <input 
-                   type="text"
-                   value={count}
-                   onChange={handleInputChange}
-                   className="w-12 text-center"
-               />
-               <button
-                   onClick={increment}
-                   className="bg-red-500 text-white font-bold rounded px-4 h-7"
-                   type="button"
-               >
-                   +
-               </button>
-           </div>
-       )}
+       
+      {!variants && (
+          <div className="flex items-center justify-center space-x-2 mt-1"  style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}
+          >
+              <button
+                  onClick={decrement}
+                  className="bg-red-500 text-white font-bold rounded px-4 h-7"
+                  type="button"
+              >
+                  -
+              </button>
+              <input 
+                  type="text"
+                  value={count}
+                  onChange={handleInputChange}
+                  className="w-12 text-center"
+              />
+              <button
+                  onClick={increment}
+                  className="bg-red-500 text-white font-bold rounded px-4 h-7"
+                  type="button"
+              >
+                  +
+              </button>
+          </div>
+      )}
+      
    </div>
     );
 }
 
-export default SingleProduct;
+export default SingleFeaturedProduct;

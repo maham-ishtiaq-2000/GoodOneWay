@@ -1,17 +1,18 @@
 import React from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 
-const SearchBar = ({placeholderName}) => {
+const SearchBar = ({placeholderName, onSearchChange}) => {
   const [searchValue, setSearchValue] = React.useState('');
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
+    onSearchChange(event.target.value);  // Pass the value to the parent component
   };
 
   const handleClearSearch = () => {
     setSearchValue('');
+    onSearchChange('');  // Reset the search in the parent component
   };
-
   return (
     <div className="w-full top-2 left-0 z-10">
       <div className="flex items-center justify-center w-full">
