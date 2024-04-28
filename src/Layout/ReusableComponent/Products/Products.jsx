@@ -3,7 +3,6 @@ import SingleProduct from './SingleProduct';
 import SingleFeaturedProduct from './SingleFeaturedProduct';
 
 const Products = ({ ProductArray, component }) => {
-  
   // Check if the current component is not 'HomePage'
   const isNotHomePage = component !== 'HomePage';
 

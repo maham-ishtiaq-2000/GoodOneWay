@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegBuilding, FaTags, FaHome, FaSearch, FaCartArrowDown } from 'react-icons/fa';
+import { CartContext } from '../../Layout/context/CartContext';
 
 const Footer = ({formPage}) => {
+  const {totalPrice,cartItems} = useContext(CartContext)
   const navigate = useNavigate();
+  const totalSkus = cartItems.length
 
   const isActive = (path) => {
     // This should match the path with the current location's pathname
@@ -17,7 +20,7 @@ const Footer = ({formPage}) => {
        {!formPage && <div className="flex flex-col justify-center items-center pt-2 pb-1"
              style={{ boxShadow: '0 -8px 10px -10px rgba(0, 0, 0, 0.3)' }}>
             <p>
-                4 SKUs <span style={{ margin: '0 10px' }}>|</span> £155.00
+                {totalSkus} SKUs <span style={{ margin: '0 10px' }}>|</span> £{totalPrice}
                 <span style={{ margin: '0 2px', fontSize: '11px', position: 'relative', top: '-2px' }}>(Excl.Tax)</span>
             </p>
             <p className='text-sm text-gray mt-2'>Spend £145.00 more for Free Next Day Delivery</p>

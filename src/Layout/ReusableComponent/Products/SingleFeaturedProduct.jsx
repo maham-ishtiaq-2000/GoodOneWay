@@ -1,15 +1,147 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
+import axios from 'axios';
+import { CartContext } from '../../../Layout/context/CartContext';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import SingleVariant from './SingleVariant';
 import './SingleProduct.css';
 
 const SingleFeaturedProduct = ({ product }) => {
+    const { cartItems, addToCartFromQuantityInput, removeFromCart } = useContext(CartContext);
     const [count, setCount] = useState(0);
-    const increment = () => setCount(count + 1);
-    const decrement = () => setCount(count > 0 ? count - 1 : 0);
-    const [isLiked, setIsLiked] = useState(false); // State to track whether the icon is liked
+    const [isLiked, setIsLiked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
+    const [productData, setProductData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const url = 'https://881ccd-2.myshopify.com/api/2024-04/graphql.json';
+            const headers = {
+                'Content-Type': 'application/json',
+                'X-Shopify-Storefront-Access-Token': 'fcc1ef09b820e82704c1e9e597cddd84',
+            };
+
+            const query = `
+                {
+                    product(id: "${product.id}") {
+                        id
+                        title
+                        descriptionHtml
+                        variants(first: 1) {
+                            edges {
+                                node {
+                                    id
+                                    title
+                                    priceV2 {
+                                        amount
+                                        currencyCode
+                                    }
+                                    sku
+                                    selectedOptions {
+                                        name
+                                        value
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `;
+
+            try {
+                const response = await axios.post(url, { query }, { headers });
+                setProductData(response.data.data.product);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching product data:", error);
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [product.id]);
+
+    useEffect(() => {
+        const variantId = productData?.variants.edges[0]?.node.id;
+        const cartItem = cartItems.find(item => item.merchandiseId === variantId);
+        setCount(cartItem?.quantity || 0);
+    }, [cartItems, productData]);
+
+    const increment = () => {
+        if (!productData || !productData.variants.edges[0]) {
+            console.error("Product data is not available.");
+            return;
+        }
+
+        const newCount = count + 1;
+        setCount(newCount);
+        const variant = productData.variants.edges[0].node;
+    
+        const productToAdd = {
+            merchandiseId: variant.id,
+            imageURL: product.img, // Make sure this is correct
+            title: productData.title,
+            description: productData.description,
+            price: variant.priceV2.amount,
+            quantity: newCount
+        };
+    
+        addToCartFromQuantityInput(productToAdd, newCount);
+    };
+    const decrement = () => {
+        const newCount = count - 1;
+        if (newCount > 0) {
+            setCount(newCount);
+            if (productData && productData.variants.edges.length > 0) {
+                const variant = productData.variants.edges[0].node;
+                addToCartFromQuantityInput({
+                    merchandiseId: variant.id,
+                    imageURL: product.img, // Ensure this matches the structure of your product data
+                    title: productData.title,
+                    description: productData.descriptionHtml,
+                    price: variant.priceV2.amount,
+                    quantity: newCount
+                }, newCount);
+            }
+        } else if (newCount === 0) {
+            setCount(0);
+            if (productData && productData.variants.edges.length > 0) {
+                const variantId = productData.variants.edges[0].node.id;
+                removeFromCart(variantId);
+            }
+        }
+    };
+    
+
+
+
+    const handleInputChange = (event) => {
+        const inputQuantity = parseInt(event.target.value, 10);
+        if (!isNaN(inputQuantity) && inputQuantity >= 0) {
+            setCount(inputQuantity);
+            if (productData && productData.variants.edges.length > 0) {
+                const variant = productData.variants.edges[0].node;
+                addToCartFromQuantityInput({
+                    merchandiseId: variant.id,
+                    imageURL: product.img,
+                    title: productData.title,
+                    description: productData.descriptionHtml,
+                    price: variant.priceV2.amount,
+                    quantity: inputQuantity
+                }, inputQuantity);
+            }
+        } else {
+            setCount(0);  // Reset count if invalid input
+        }
+    };
+
+    
+    
+    
+    
 
     const closeModal = () => {
         setIsClosing(true);
@@ -19,14 +151,6 @@ const SingleFeaturedProduct = ({ product }) => {
         }, 300);
     };
 
-    const handleInputChange = (event) => {
-        const value = parseInt(event.target.value, 10);
-        if (!isNaN(value) && value >= 0) {
-            setCount(value);
-        } else {
-            setCount(0);
-        }
-    };
 
     const toggleModal = () => {
         if (isModalOpen) {
@@ -42,7 +166,7 @@ const SingleFeaturedProduct = ({ product }) => {
         variants = product.variants.edges.map(edge => edge.node);
     }
     else{
-        console.log(variants)
+        //console.log(variants)
     }
  
 

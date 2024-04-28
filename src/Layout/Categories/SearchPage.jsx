@@ -148,6 +148,8 @@ const SearchPage = () => {
         setFilteredProducts(sorted);
         setIsDropdownOpen(false); // Explicitly close the dropdown here
     };
+
+
     
 
     return (
