@@ -150,13 +150,15 @@ const SearchPage = () => {
     };
 
 
+    console.log(products)
+
     
 
     return (
         <>
             <div className='bg-lightPink'>
                 <SideBar />
-                <div className="flex w-full">
+                <div className="flex w-9/10 ml-3 mr-5">
                     <div className="flex-1 w-95 lg:ml-5">
                         <div className="w-full top-2 left-0 z-10">
                             <div className="flex items-center justify-center w-full">
@@ -166,6 +168,7 @@ const SearchPage = () => {
                                         type="text"
                                         value={searchValue}
                                         onChange={handleSearchChange}
+                                        placeholder='Search Available Products'
                                         className="w-full pl-20 pr-10 py-3 rounded-full text-grey bg-lightGray focus:outline-none"
                                     />
                                     {searchValue && (
@@ -178,7 +181,7 @@ const SearchPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="relative w-5">
+                    <div className="relative w-5 mt-1">
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <FaArrowUp onClick={toggleDropdown} />
                             <FaArrowDown className='ml-3' onClick={toggleDropdown} />

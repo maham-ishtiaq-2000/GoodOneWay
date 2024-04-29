@@ -6,24 +6,25 @@ import Brand from './Layout/Categories/Brand';
 import Categories from "./Layout/Categories/Categories";
 import Cart from './Layout/Categories/Cart';
 import SearchPage from "./Layout/Categories/SearchPage";
+import FeaturedProducts from "./SideBarRoutes/FeaturedProducts";
+import ClearanceProducts from "./SideBarRoutes/ClearanceProducts";
+import TrendingProducts from "./SideBarRoutes/TrendingProducts";
 
+// Inline function to check if the user is authenticated
+const isAuthenticated = () => Boolean(localStorage.getItem("accessToken"));
 
-// ProtectedRoute component
 const ProtectedRoute = ({ children }) => {
-    const token = localStorage.getItem("accessToken");
-
-    // Check if token exists, render children if true, otherwise redirect to login
-    if (!token) {
+    if (!isAuthenticated()) {
         return <Navigate to="/" replace />;
     }
-
     return children;
 };
 
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<Login />} />  // Unprotected Route
+            {/* Redirect based on authentication status */}
+            <Route path="/" element={isAuthenticated() ? <Navigate to="/home" replace /> : <Login />} />
             <Route path="/home" element={
                 <ProtectedRoute>
                     <Home />
@@ -39,12 +40,12 @@ const AppRoutes = () => {
                     <Categories />
                 </ProtectedRoute>
             } />
-              <Route path="/cart" element={
+            <Route path="/cart" element={
                 <ProtectedRoute>
                     <Cart />
                 </ProtectedRoute>
             } />
-             <Route path="/searchPage/:brand" element={
+            <Route path="/searchPage/:brand" element={
                 <ProtectedRoute>
                     <SearchPage />
                 </ProtectedRoute>
@@ -54,7 +55,21 @@ const AppRoutes = () => {
                     <SearchPage />
                 </ProtectedRoute>
             } />
-            
+              <Route path="/featuredProducts" element={
+                <ProtectedRoute>
+                    <FeaturedProducts />
+                </ProtectedRoute>
+            } />
+            <Route path="/clearanceProducts" element={
+                <ProtectedRoute>
+                    <ClearanceProducts />
+                </ProtectedRoute>
+            } />
+             <Route path="/trendingProducts" element={
+                <ProtectedRoute>
+                    <TrendingProducts />
+                </ProtectedRoute>
+            } />
         </Routes>
     );
 };

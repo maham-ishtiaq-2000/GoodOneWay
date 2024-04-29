@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext,useState} from 'react';
 import axios from 'axios';
 import SideBar from '../SideBar/SideBar';
 import Footer from '../Footer/Footer';
@@ -9,6 +9,22 @@ import './Cart.css';
 
 const Cart = () => {
     const { cartItems, addToCart, addToCartFromQuantityInput, removeFromCart, removeItemFromCart, totalPrice, clearCart } = useContext(CartContext);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+     // Function to handle clearing cart
+     const handleClearCart = () => {
+        setShowConfirmationModal(true);
+    };
+
+    // Function to confirm and clear the cart
+    const confirmClearCart = () => {
+        clearCart();
+        setShowConfirmationModal(false);
+    };
+
+    // Function to cancel clearing the cart
+    const cancelClearCart = () => {
+        setShowConfirmationModal(false);
+    };
     console.log("Total price in Cart Component:", totalPrice);
 
     const summaryItems = cartItems.map(item => ({
@@ -109,20 +125,20 @@ const Cart = () => {
                                 </button>
 
                                     <div className="flex flex-col items-center ml-2">
-                                        <button className="bg-red-500 text-white rounded shadow-md px-1"
-                                                onClick={() => addToCartFromQuantityInput(item, item.quantity + 1)}>▲</button>
+                                        <button className="text-white rounded shadow-md px-1"
+                                                onClick={() => addToCartFromQuantityInput(item, item.quantity + 1)} style={{"backgroundColor" : "#C71313"}}>▲</button>
                                         <input type="text" value={item.quantity} 
                                             className={`text-center mt-20 mb-20 ${index % 2 === 0 ? 'bg-platinum' : 'bg-white'} `} 
                                             style={{ width: '40px', margin: '4px 0' }}
                                             onChange={(e) => addToCartFromQuantityInput(item, parseInt(e.target.value) || item.quantity)} />
-                                        <button className="bg-red-500 text-white rounded shadow-md px-1"
+                                        <button className="text-white rounded shadow-md px-1"
                                                     onClick={() => {
                                                         if (item.quantity > 1) {
                                                             addToCartFromQuantityInput(item, item.quantity - 1);
                                                         } else {
                                                             removeFromCart(item.merchandiseId);  // Remove item if quantity is 1 and decrement is clicked
                                                         }
-                                                    }}>▼</button>
+                                                    }} style={{"backgroundColor" : "#C71313"}}>▼</button>
                                     </div>
                                 </div>
                             </div>
@@ -149,19 +165,31 @@ const Cart = () => {
                         </div>
                     </div>
 
-                <div className="flex flex-col md:flex-row w-full  space-y-2 space-x-1 md:space-y-0">
-                    <div className="md:w-2/6">
-                        <button className='px-10 py-2 w-full bg-platinum border border-red-500 rounded-full text-red-500' onClick={clearCart}>
-                        Clear
-                        </button>
+                    <div className="flex flex-col md:flex-row w-9/10 space-y-4 space-x-1 md:space-y-0">
+                        <div className="md:w-full flex">
+                            <button className='w-full md:w-1/2 px-10 py- bg-platinum border border-red-500 rounded-full text-red-500 mb-2 md:mb-0 md:mr-1' onClick={handleClearCart}>
+                                Clear
+                            </button>
+                            <button className='w-full md:w-1/2 px-10 py- border border-red-500 rounded-full text-white mb-2 md:mb-0 md:mr-1' onClick={handleCheckout} style={{"backgroundColor" : "#C71313"}}>
+                                Go To CheckOut
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="md:w-4/6">
-                        <button className='px-10 py-2 w-full bg-red-500 border border-red-500 rounded-full text-white' onClick={handleCheckout}>
-                        Go To Checkout
-                        </button>
+
+
+                {cartItems.length > 0 && showConfirmationModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white p-8 rounded-md shadow-lg">
+                            <p className="text-lg font-semibold mb-4">Are you sure you want to clear the cart?</p>
+                            <div className="flex justify-center">
+                                <button className="flex-1 py-2 mr-2 text-white rounded-md" onClick={cancelClearCart} style={{"backgroundColor" : "#C71313"}}>Cancel</button>
+                                <button className="flex-1 py-2 text-white rounded-md" onClick={confirmClearCart} style={{"backgroundColor" : "#C71313"}}>Clear Cart</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                )}
+
 
                     
                 </div>

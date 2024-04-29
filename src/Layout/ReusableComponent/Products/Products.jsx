@@ -18,12 +18,10 @@ const Products = ({ ProductArray, component }) => {
           </div>
         )}
         {!isNotHomePage && (
-          <div 
-          className="grid auto-cols-max grid-flow-col gap-3 p-4 overflow-x-auto lg:pb-10"
-        >
-          {ProductArray.map((product, index) => (
-            <SingleFeaturedProduct key={index} product={product} />
-          ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 gap-y-10 py-4 overflow-auto pb-10" style={{ height: '85vh' }}>
+            {ProductArray.map((product, index) => (
+              <SingleFeaturedProduct key={index} product={product} />
+            ))}
         </div>
         
         )}

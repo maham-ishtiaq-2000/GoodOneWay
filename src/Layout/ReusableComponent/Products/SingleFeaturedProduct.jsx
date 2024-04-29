@@ -172,7 +172,7 @@ const SingleFeaturedProduct = ({ product }) => {
 
     return (
         <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-2 relative" 
-        style={{ width: "200px", height: "350px", boxSizing: 'border-box' }}>
+        style={{ width: "180px", height: "350px", boxSizing: 'border-box' }}>
        <div className="w-full relative">
            <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
                {isLiked ? (
@@ -189,9 +189,9 @@ const SingleFeaturedProduct = ({ product }) => {
        </div>
        {variants && (
            <button
-               className='bg-red-500 text-white rounded mt-2 py-1 mx-auto mt-1'
+               className='text-white rounded mt-2 py-1 mx-auto mt-1'
                onClick={toggleModal}
-               style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}
+               style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' , "backgroundColor" : "#C71313"}}
 
            >
                Select Variant
@@ -221,7 +221,8 @@ const SingleFeaturedProduct = ({ product }) => {
           >
               <button
                   onClick={decrement}
-                  className="bg-red-500 text-white font-bold rounded px-4 h-7"
+                  className="text-white font-bold rounded px-4 h-7"
+                  style={{"backgroundColor" : "#C71313"}}
                   type="button"
               >
                   -
@@ -234,7 +235,8 @@ const SingleFeaturedProduct = ({ product }) => {
               />
               <button
                   onClick={increment}
-                  className="bg-red-500 text-white font-bold rounded px-4 h-7"
+                  className="text-white font-bold rounded px-4 h-7"
+                  style={{"backgroundColor" : "#C71313"}}
                   type="button"
               >
                   +

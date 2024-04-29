@@ -31,7 +31,7 @@ function Navbar() {
           <img src={Logo} alt="Logo" className="w-30 h-20" />
           <div className="icon-container absolute top-7 right-10 flex items-center space-x-4">
             <FaIcons.FaHeart className="text-2xl" />
-            <FaIcons.FaUser className="text-2xl"/>
+            
           </div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"} style={{"paddingRight" : "10px"}}>

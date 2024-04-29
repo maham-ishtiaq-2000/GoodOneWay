@@ -13,7 +13,8 @@ module.exports = {
         "darkGrey" : "#696969",
         "homePageColor" : "#fefbff",
         "white" : "#ffffff",
-        "lightGray" : "#d4d4d4"
+        "lightGray" : "#d4d4d4",
+        "darkPink": '#ff1493',
       },
       fontSize: {
         xxs: '0.85rem' // This is approximately 12px; adjust as needed

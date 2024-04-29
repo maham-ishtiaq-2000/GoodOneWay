@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+
      <!-- other tags -->
      <link rel="icon" href="/favicon.ico" />
      <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" sizes="180x180" />
@@ -12,6 +13,25 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.jsx">
+      function preventZoom(e) {
+            var t2 = e.timeStamp;
+            var t1 = e.currentTarget.dataset.lastTouch || t2;
+            var dt = t2 - t1;
+            var fingers = e.touches.length;
+            e.currentTarget.dataset.lastTouch = t2;
+
+            if (!dt || dt > 500 || fingers > 1) return; // this part disallows more than one finger
+
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          document.addEventListener('touchstart', preventZoom, {passive: false});
+          document.addEventListener('touchmove', preventZoom, {passive: false});
+          document.addEventListener('touchend', preventZoom, {passive: false});
+          document.addEventListener('touchcancel', preventZoom, {passive: false});
+
+    </script>
   </body>
 </html>

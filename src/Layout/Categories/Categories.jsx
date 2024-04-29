@@ -9,6 +9,7 @@ import SearchBar from '../ReusableComponent/SearchBar';
 const Categories = () => {
     const [categories, setCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -48,6 +49,9 @@ const Categories = () => {
         category.title.toLowerCase().includes(searchTerm) || 
         (category.description && category.description.toLowerCase().includes(searchTerm))
     );
+    console.log(filteredCategories)
+   
+
 
     return (
         <>
@@ -73,9 +77,9 @@ const Categories = () => {
                         </div>
                     </div>
                 </div>
-                <div className="overflow-auto mb-5 pb-10" style={{ height: '80vh' }}>
+                <div className="overflow-auto mb-5 pb-10 ml-5 mr-5" style={{ height: '80vh' }}>
                     {filteredCategories.map((category, index) => (
-                        <SingleCategory key={index} category={category} />
+                        <SingleCategory key={index} category={category}  />
                     ))}
                 </div>
                 <Footer formPage="CategoriesPage" />

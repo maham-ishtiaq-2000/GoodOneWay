@@ -88,8 +88,8 @@ const SingleProduct = ({ product }) => {
                 <p className='text-md mt-8'>£{product.priceRange.maxVariantPrice.amount}<span style={{"fontSize": "10px"}} className='text-gray'>(Excl. Tax)</span></p>
             </div>
             {!variants || variants.length !== 1 && (
-                <button className='bg-red-500 text-white rounded mt-2 py-1 mx-auto mt-1' onClick={toggleModal}
-                    style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}>
+                <button className='text-white rounded mt-2 py-1 mx-auto mt-1' onClick={toggleModal}
+                    style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' ,"backgroundColor" : "#C71313"}}>
                     Select Variant
                 </button>
             )}
@@ -112,9 +112,9 @@ const SingleProduct = ({ product }) => {
             )}
             {!variants || variants.length === 1 && (
                 <div className="flex items-center justify-center space-x-2 mt-1"  style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}>
-                    <button onClick={decrement} className="bg-red-500 text-white font-bold rounded px-4 h-7" type="button">-</button>
+                    <button onClick={decrement} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>-</button>
                     <input type="text" value={count} onChange={handleInputChange} className="w-12 text-center" />
-                    <button onClick={increment} className="bg-red-500 text-white font-bold rounded px-4 h-7" type="button">+</button>
+                    <button onClick={increment} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>+</button>
                 </div>
             )}
         </div>

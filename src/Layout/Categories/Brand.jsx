@@ -74,7 +74,7 @@ const Brand = () => {
                         )}
                     </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10 pl-3 overflow-auto pb-40 mt-5 mx-auto"
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10 pl-3 overflow-auto pb-40 mt-5 mx-auto"
                      style={{ height: 'auto' ,width: '95%' }}>
                     {filteredBrands.map((brand, index) => (
                         <SingleBrand key={index} brand={brand} />

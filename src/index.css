@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+html,body {
+    touch-action: manipulation; /* This can block pinch-zoom but allows panning */
+  }
+  
+

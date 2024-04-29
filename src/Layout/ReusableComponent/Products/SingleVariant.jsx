@@ -82,9 +82,9 @@ const SingleVariant = ({ item }) => {
                 </div>
             </div>
             <div className="flex items-center">
-                <button onClick={decrement} className="bg-red-500 text-white font-bold rounded w-6 h-6 flex items-center justify-center" type="button">-</button>
+                <button onClick={decrement} className="text-white font-bold rounded w-6 h-6 flex items-center justify-center" type="button" style={{"backgroundColor" : "#C71313"}}>-</button>
                 <input type="text" value={count} onChange={handleInputChange} className="mx-2 text-center w-8 outline-none" />
-                <button onClick={increment} className="bg-red-500 text-white font-bold rounded w-6 h6 flex items-center justify-center" type="button">+</button>
+                <button onClick={increment} className="text-white font-bold rounded w-6 h6 flex items-center justify-center" type="button" style={{"backgroundColor" : "#C71313"}}>+</button>
             </div>
         </div>
     );

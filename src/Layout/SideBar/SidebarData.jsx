@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUser, FaStar, FaHeart, FaImage, FaRegFolder, FaBullhorn } from 'react-icons/fa';
+import { FaUser, FaStar, FaHeart, FaImage, FaRegFolder, FaBullhorn, FaProductHunt } from 'react-icons/fa';
 import { IoIosAirplane, IoMdExit } from 'react-icons/io'; 
 import { FiTrendingUp ,  FiVolume2} from 'react-icons/fi'
 
@@ -14,25 +14,25 @@ const FolderWithStar = () => (
 export const SidebarData = [
   {
     title: "My Account",
-    path: "/",
+    path: "https://goodonedeals.co.uk/account/login?return_url=%2Faccount",
     icon: <FaUser />,
     cName: "nav-text",
   },
    {
     title: "Exclusive Products",
-    path: "/reports",
-    icon: <FolderWithStar />,
+    path: "/featuredProducts",
+    icon: <FaProductHunt />,
     cName: "nav-text",
   },
   {
     title: "Trending Products",
-    path: "/products",
+    path: "/trendingProducts",
     icon: <FiTrendingUp />,
     cName: "nav-text",
   },
   {
     title: "Clearance",
-    path: "/team",
+    path: "/clearanceProducts",
     icon: <FaBullhorn />,
     cName: "nav-text",
   },
@@ -44,7 +44,7 @@ export const SidebarData = [
   },
   {
     title: "Contact Us",
-    path: "/support",
+    path: "https://goodonedeals.co.uk/pages/contact",
     icon: <FaImage />,
     cName: "nav-text",
   },

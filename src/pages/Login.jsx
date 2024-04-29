@@ -101,10 +101,14 @@ const Login = () => {
                             className="w-full text-white bg-darkRed hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 focus:outline-none font-medium rounded-lg text-sm px-5 py-4 text-center transition-colors duration-200">
                         Sign In
                     </button>
-                    <div className="text-sm font-medium text-center text-red-500">Forgot Password?</div>
+                    <div className="text-sm font-medium text-center text-red">Forgot Password?</div>
                     <div className="text-sm font-medium text-center text-gray-500 mt-6">
                         <hr className="my-6" />
-                        Create New Account
+                        <a href="https://goodonedeals.co.uk/account/register"
+                                className="text-darkGrey bg-pink rounded py-2 px-4 cursor-pointer hover:bg-darkRed hover:text-white transition-colors duration-200"
+                                style={{ cursor: 'pointer' }}>
+                                    Create New Account
+                        </a>
                     </div>
                 </form>
             </div>
