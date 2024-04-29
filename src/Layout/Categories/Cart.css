@@ -6,4 +6,63 @@
 .shadow-top {
     box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
   }
+
+
+  /* Slide in from bottom animation */
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%); /* Start from just below the screen */
+  }
+  100% {
+    transform: translateY(0); /* End at the bottom of the screen */
+  }
+}
+
+
+.modal-appear {
+  animation: 0.3s ease-out 0s 1 slideInFromBottom forwards; /* Add 'forwards' here */
+}
+
+/* Slide out to bottom animation */
+@keyframes slideOutToBottom {
+  0% {
+    transform: translateY(0); /* Start at the current position */
+  }
+  100% {
+    transform: translateY(100%); /* Slide down off the screen */
+  }
+}
+
+.modal-disappear {
+  animation: 0.3s ease-out 0s 1 slideOutToBottom forwards;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1051; /* Optionally higher than the overlay if needed */
+}
+
+.modal-content.modal-appear {
+  animation: 0.3s ease-out 0s 1 slideInFromBottom forwards;
+}
+
+.modal-content.modal-disappear {
+  animation: 0.3s ease-out 0s 1 slideOutToBottom forwards;
+}
+
   

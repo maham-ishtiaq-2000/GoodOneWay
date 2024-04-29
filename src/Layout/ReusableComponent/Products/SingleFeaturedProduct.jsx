@@ -5,8 +5,8 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import SingleVariant from './SingleVariant';
 import './SingleProduct.css';
 
-const SingleFeaturedProduct = ({ product }) => {
-    const { cartItems, addToCartFromQuantityInput, removeFromCart } = useContext(CartContext);
+const SingleFeaturedProduct = ({ product, style }) => {
+    const { cartItems, addToCartFromQuantityInput, removeFromCart, addToFavourites, removeFromFavourites } = useContext(CartContext);
     const [count, setCount] = useState(0);
     const [isLiked, setIsLiked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,7 +62,29 @@ const SingleFeaturedProduct = ({ product }) => {
         };
 
         fetchData();
+        checkIfFavourited();
     }, [product.id]);
+
+    const checkIfFavourited = () => {
+        // Assume a method to check if the product is already favourited
+        // For example, you might check this from a local state or context
+        // setIsLiked(true/false based on condition);
+    };
+
+    const toggleFavourite = () => {
+        setIsLiked(!isLiked);
+        if (!isLiked) {
+            addToFavourites({
+                merchandiseId: productData?.variants.edges[0]?.node.id,
+                imageURL: product.img,
+                title: productData.title,
+                description: productData.description,
+                price: productData?.variants.edges[0]?.node.priceV2.amount,
+            });
+        } else {
+            removeFromFavourites(productData?.variants.edges[0]?.node.id);
+        }
+    };
 
     useEffect(() => {
         const variantId = productData?.variants.edges[0]?.node.id;
@@ -173,16 +195,16 @@ const SingleFeaturedProduct = ({ product }) => {
     return (
         <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-2 relative" 
         style={{ width: "180px", height: "350px", boxSizing: 'border-box' }}>
-       <div className="w-full relative">
-           <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
-               {isLiked ? (
-                   <AiFillHeart size={24} color="red" onClick={() => setIsLiked(false)} />
-               ) : (
-                   <AiOutlineHeart size={24} color="red" onClick={() => setIsLiked(true)} />
-               )}
-           </div>
-           <img src={product.img} alt="Product" className='w-30 h-25' />
-       </div>
+           <div className="w-full relative">
+                <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
+                    {isLiked ? (
+                        <AiFillHeart size={24} color="red" onClick={toggleFavourite} />
+                    ) : (
+                        <AiOutlineHeart size={24} color="red" onClick={toggleFavourite} />
+                    )}
+                </div>
+                <img src={product.img} alt="Product" className='w-30 h-25' />
+            </div>
        <div className="w-full text-center mb-2">
            <p className='text-xxs'>{product.title}</p>
            <p className='text-md mt-8'>£{product.priceRange.minVariantPrice.amount}<span style={{"fontSize": "10px"}} className='text-gray'>(Excl. Tax)</span></p>

@@ -5,6 +5,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [favourites, setFavourites] = useState([]);
 
     useEffect(() => {
         console.log("Calculating total price for items:", cartItems);
@@ -71,6 +72,23 @@ export const CartProvider = ({ children }) => {
         });
     };
 
+    const addToFavourites = (product) => {
+        setFavourites(currentFavourites => {
+            const isAlreadyFavourite = currentFavourites.some(item => item.merchandiseId === product.merchandiseId);
+            if (!isAlreadyFavourite) {
+                return [...currentFavourites, product];
+            }
+            return currentFavourites;
+        });
+    };
+
+    const removeFromFavourites = (merchandiseId) => {
+        setFavourites(currentFavourites => {
+            return currentFavourites.filter(item => item.merchandiseId !== merchandiseId);
+        });
+    };
+
+
     const removeItemFromCart = (merchandiseId) => {
         setCartItems(currentItems => {
             return currentItems.filter(item => item.merchandiseId !== merchandiseId);
@@ -81,7 +99,7 @@ export const CartProvider = ({ children }) => {
         setCartItems([]);  // Clears all items from the cart
     };
 
-    const value = { cartItems, addToCart, addToCartFromQuantityInput, removeFromCart, removeItemFromCart, totalPrice, clearCart };
+    const value = { cartItems, addToCart, addToCartFromQuantityInput, removeFromCart, removeItemFromCart, totalPrice, clearCart, addToFavourites,removeFromFavourites, favourites };
 
     return (
         <CartContext.Provider value={value}>

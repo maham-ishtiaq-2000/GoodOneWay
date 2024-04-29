@@ -20,12 +20,12 @@ const Brand = () => {
             const graphqlQuery = {
                 query: `query { collections(first: 250, query:"tag:brand") { edges { node { id title description image { url } } } } }`
             };
-
+        
             try {
                 const response = await axios.post(url, graphqlQuery, { headers });
                 const fetchedBrands = response.data.data.collections.edges
                     .map(edge => edge.node)
-                    .filter(brand => brand.image && brand.image.url);
+                    .filter(brand => brand.description && brand.description.toLowerCase() === 'brand' && brand.image && brand.image.url);
                 
                 setBrands(fetchedBrands);
                 setFilteredBrands(fetchedBrands); // Initialize filtered brands
@@ -52,6 +52,8 @@ const Brand = () => {
         setSearchValue('');
     };
 
+    console.log(brands)
+
     return (
         <>
             <div className='homePageColor'>
@@ -74,12 +76,13 @@ const Brand = () => {
                         )}
                     </div>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10 pl-3 overflow-auto pb-40 mt-5 mx-auto"
-                     style={{ height: 'auto' ,width: '95%' }}>
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10 overflow-auto pb-40 pt-5 mx-auto"
+                    style={{ height: 'auto', width: '95%', margin: '0 20px' }}>
                     {filteredBrands.map((brand, index) => (
                         <SingleBrand key={index} brand={brand} />
                     ))}
                 </div>
+
                 <Footer formPage="brandPage" />
             </div>
         </>

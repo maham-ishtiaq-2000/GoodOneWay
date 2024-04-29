@@ -93,7 +93,7 @@ const Cart = () => {
         <>
             <div className='CartPageColor'>
                 <SideBar />
-                <div className="overflow-auto mb-8" style={{ height: '80vh' }}>
+                <div className="overflow-auto mb-8 mx-2" style={{ height: '63vh' }}>
                     {cartItems.map((item, index) => (
                         <div className={`flex w-full ${index % 2 === 0 ? 'bg-platinum' : 'bg-white'}`} key={item.merchandiseId}>
                             <div className={`w-4/5 ${index % 2 === 0 ? 'bg-platinum' : 'bg-white'}`}>
@@ -109,7 +109,7 @@ const Cart = () => {
                                         </div>
                                         <div className="flex-1 ml-3">
                                             <p className='text-xxs text-darkGrey mt-1'>{item.title}</p>
-                                            <p className='text-sm text-black mt-6'>£{item.price}</p> 
+                                            <p className='text-sm text-black mt-6'>£{item.price*item.quantity}</p> 
                                             <p className='text-xxs text-darkGrey'>{item.description}</p> 
                                         </div>
                                     </div>
@@ -145,7 +145,10 @@ const Cart = () => {
                         </div>
                     ))}
 
-                    <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4 border-b border-gray pb-3 shadow-top pt-2">
+
+                    
+                </div>
+                <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4 border-b border-gray pb-3 shadow-top pt-2">
                                         <div>
                                             <p className='text-sm text-gray'>SKUs:</p>
                                         </div>
@@ -177,22 +180,21 @@ const Cart = () => {
                     </div>
 
 
-
-                {cartItems.length > 0 && showConfirmationModal && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                        <div className="bg-white p-8 rounded-md shadow-lg">
+                    {cartItems.length > 0 && showConfirmationModal && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center">
+                            <div className={`bg-black bg-opacity-50 modal-overlay`}></div>
+                            <div className={`bg-white p-8 rounded-md shadow-lg modal-content ${showConfirmationModal ? 'modal-appear' : 'modal-disappear'}`}>
                             <p className="text-lg font-semibold mb-4">Are you sure you want to clear the cart?</p>
                             <div className="flex justify-center">
                                 <button className="flex-1 py-2 mr-2 text-white rounded-md" onClick={cancelClearCart} style={{"backgroundColor" : "#C71313"}}>Cancel</button>
                                 <button className="flex-1 py-2 text-white rounded-md" onClick={confirmClearCart} style={{"backgroundColor" : "#C71313"}}>Clear Cart</button>
                             </div>
+                            </div>
                         </div>
-                    </div>
-                )}
+                        )}
 
 
-                    
-                </div>
+
                 <Footer formPage="cartPage"/>
             </div>
         </>

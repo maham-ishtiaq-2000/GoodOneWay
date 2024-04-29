@@ -72,7 +72,7 @@ const SingleProduct = ({ product }) => {
 
     return (
         <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-1 relative" 
-        style={{ width: "180px", height: "350px", boxSizing: 'border-box' }}>
+        style={{ width: "180px", height: "350px", boxSizing: 'border-box',  margin: '0 20px' }}>
             <div className="w-full relative">
                 <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
                     {isLiked ? (

@@ -21,7 +21,7 @@ const SingleVariant = ({ item }) => {
         const productToAdd = {
             merchandiseId: item.id,
             imageURL: item.image.url,
-            title: item.title,
+            title: item.product.title,
             description: item.description || item.title,
             price: item.price.amount,
             quantity: newCount

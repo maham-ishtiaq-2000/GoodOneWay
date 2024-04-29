@@ -133,18 +133,20 @@ const Home = () => {
             <div className='bg-homePageColor'>
                 <SideBar />
                 <div className='bg-homePageColor' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <img 
-                    src={goodOneDeals} 
-                    alt="Good One Deals" 
-                    style={{ width: '80vw', height: 'auto' }}
-                    className='mt-10 mb-5'
-                />
-                <p className='font-bold ml-10 mt-2 font-bold'>Featured</p>
+                    <img 
+                        src={goodOneDeals} 
+                        alt="Good One Deals" 
+                        style={{ width: '100vw', height: 'auto', margin: '0 auto 10px' }}
+                        className='mt-10 mb-5'
+                    />
+                </div>
+
+
+                <p className='font-bold ml-10 mt-10 font-bold'>Featured</p>
                 <Products ProductArray={products} component="HomePage"/> 
                 <div style={{"marginBottom" : "130px"}}>
                     <p className='font-bold ml-10 font-bold '>Clearance</p>
                     <Products ProductArray={clearanceProducts} component="HomePage"/> 
-                </div>
                 </div>
                 
                 <Footer />

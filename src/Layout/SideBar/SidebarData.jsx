@@ -38,7 +38,7 @@ export const SidebarData = [
   },
   {
     title: "Favourites",
-    path: "/messages",
+    path: "/favouriteProducts",
     icon: <FaHeart />,
     cName: "nav-text",
   },

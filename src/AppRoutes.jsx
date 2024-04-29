@@ -9,6 +9,7 @@ import SearchPage from "./Layout/Categories/SearchPage";
 import FeaturedProducts from "./SideBarRoutes/FeaturedProducts";
 import ClearanceProducts from "./SideBarRoutes/ClearanceProducts";
 import TrendingProducts from "./SideBarRoutes/TrendingProducts";
+import FavouriteProducts from "./SideBarRoutes/FavouriteProducts";
 
 // Inline function to check if the user is authenticated
 const isAuthenticated = () => Boolean(localStorage.getItem("accessToken"));
@@ -68,6 +69,11 @@ const AppRoutes = () => {
              <Route path="/trendingProducts" element={
                 <ProtectedRoute>
                     <TrendingProducts />
+                </ProtectedRoute>
+            } />
+             <Route path="/favouriteProducts" element={
+                <ProtectedRoute>
+                    <FavouriteProducts />
                 </ProtectedRoute>
             } />
         </Routes>
