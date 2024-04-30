@@ -10,20 +10,32 @@ import './Cart.css';
 const Cart = () => {
     const { cartItems, addToCart, addToCartFromQuantityInput, removeFromCart, removeItemFromCart, totalPrice, clearCart } = useContext(CartContext);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [modalAnimation, setModalAnimation] = useState('');
+     // Function to handle clearing cart
+     
+
+    // Function to confirm and clear the cart
      // Function to handle clearing cart
      const handleClearCart = () => {
         setShowConfirmationModal(true);
+        setModalAnimation('modal-appear'); // Set the animation state to appear initially
     };
 
-    // Function to confirm and clear the cart
+    // Function to confirm and clear the cart with animation
     const confirmClearCart = () => {
-        clearCart();
-        setShowConfirmationModal(false);
+        setModalAnimation('modal-disappear'); // Trigger the disappear animation
+        setTimeout(() => {
+            clearCart();
+            setShowConfirmationModal(false); // Hide the modal after the animation
+        }, 300); // This timeout should match the animation duration
     };
 
-    // Function to cancel clearing the cart
+    // Function to cancel clearing the cart with animation
     const cancelClearCart = () => {
-        setShowConfirmationModal(false);
+        setModalAnimation('modal-disappear');
+        setTimeout(() => {
+            setShowConfirmationModal(false);
+        }, 300); // This timeout should match the animation duration
     };
     console.log("Total price in Cart Component:", totalPrice);
 
@@ -182,17 +194,16 @@ const Cart = () => {
 
                     {cartItems.length > 0 && showConfirmationModal && (
                         <div className="fixed inset-0 z-50 flex items-center justify-center">
-                            <div className={`bg-black bg-opacity-50 modal-overlay`}></div>
-                            <div className={`bg-white p-8 rounded-md shadow-lg modal-content ${showConfirmationModal ? 'modal-appear' : 'modal-disappear'}`}>
-                            <p className="text-lg font-semibold mb-4">Are you sure you want to clear the cart?</p>
-                            <div className="flex justify-center">
-                                <button className="flex-1 py-2 mr-2 text-white rounded-md" onClick={cancelClearCart} style={{"backgroundColor" : "#C71313"}}>Cancel</button>
-                                <button className="flex-1 py-2 text-white rounded-md" onClick={confirmClearCart} style={{"backgroundColor" : "#C71313"}}>Clear Cart</button>
-                            </div>
+                            <div className="bg-black bg-opacity-50 modal-overlay"></div>
+                            <div className={`bg-white p-8 rounded-md shadow-lg modal-content ${modalAnimation}`}>
+                                <p className="text-lg font-semibold mb-4">Are you sure you want to clear the cart?</p>
+                                <div className="flex justify-center">
+                                    <button className="flex-1 py-2 mr-2 text-white rounded-md" onClick={cancelClearCart} style={{"backgroundColor" : "#C71313"}}>Cancel</button>
+                                    <button className="flex-1 py-2 text-white rounded-md" onClick={confirmClearCart} style={{"backgroundColor" : "#C71313"}}>Clear Cart</button>
+                                </div>
                             </div>
                         </div>
-                        )}
-
+                    )}
 
 
                 <Footer formPage="cartPage"/>

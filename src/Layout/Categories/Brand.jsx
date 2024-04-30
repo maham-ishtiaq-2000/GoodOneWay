@@ -87,8 +87,8 @@ const Brand = () => {
                         )}
                     </div>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10 overflow-auto pb-40 pt-5 mx-auto"
-                    style={{ height: '80vh', width: '95%', margin: '0 20px' }}>
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10  pb-40 pt-5 mx-auto"
+                    style={{ height: '80vh', width: '90%', margin: '0 20px' }}>
                     {filteredBrands.map((brand, index) => (
                         <SingleBrand key={index} brand={brand} isSelected={selectedBrandId === brand.id} onSelect={setSelectedBrandId} />
                     ))}

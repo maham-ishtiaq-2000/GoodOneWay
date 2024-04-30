@@ -216,7 +216,7 @@ const Home = () => {
                         />
                     </div>
 
-                    <p className='font-bold ml-10 mt-10 bg-homePageColor'>Featured</p>
+                    <p className='font-bold ml-10 mt-2 bg-homePageColor'>Featured</p>
                     <Products ProductArray={products} component="HomePage"/> 
                     <div style={{ marginBottom: "5px" }}>
                         <p className='font-bold ml-10 bg-homePageColor'>Clearance</p>

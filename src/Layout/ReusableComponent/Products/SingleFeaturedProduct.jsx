@@ -203,7 +203,7 @@ const SingleFeaturedProduct = ({ product, style }) => {
 
     return (
         <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-2 relative" 
-        style={{ width: "180px", height: "350px", boxSizing: 'border-box' }}>
+        style={{ width: "160px", height: "350px", boxSizing: 'border-box' }}>
            <div className="w-full relative">
                 <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
                     {isLiked ? (
@@ -268,6 +268,7 @@ const SingleFeaturedProduct = ({ product, style }) => {
             onChange={handleInputChange}
             className="w-12 text-center"
             inputMode="numeric"
+            id="numericInput"
             pattern="\d*"
             />
 

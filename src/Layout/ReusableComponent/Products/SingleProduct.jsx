@@ -93,8 +93,8 @@ const SingleProduct = ({ product }) => {
     const variants = product.variants.edges.map(edge => edge.node);
 
     return (
-        <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-1 relative" 
-        style={{ width: "180px", height: "350px", boxSizing: 'border-box',  margin: '0 20px' }}>
+        <div className="flex flex-col items-center justify-center border border-lightGray border-2 bg-white rounded-lg px-1 relative" 
+        style={{ width: "170px", height: "350px", boxSizing: 'border-box',  margin: '0 20px' }}>
             <div className="w-full relative">
                 <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
                     {isLiked ? (
@@ -139,7 +139,7 @@ const SingleProduct = ({ product }) => {
             {!variants || variants.length === 1 && (
                 <div className="flex items-center justify-center space-x-2 mt-1"  style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}>
                     <button onClick={decrement} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>-</button>
-                    <input type="text" value={count} onChange={handleInputChange}  maxLength="3" className="w-12 text-center" />
+                    <input type="text" value={count} onChange={handleInputChange}  id="numericInput" inputMode="numeric" maxLength="3" className="w-12 text-center" />
                     <button onClick={increment} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>+</button>
                 </div>
             )}
