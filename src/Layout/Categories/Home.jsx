@@ -8,6 +8,7 @@ import goodOneDeals from '../../assets/goodOneDeals.png';
 const Home = () => {
     const [products, setProducts] = useState([]);
     const [clearanceProducts, setClearanceProducts] = useState([]); // New state variable for clearance products
+    const [trendingProducts, setTrendingProducts] = useState([]); // State for trending products
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,19 +45,6 @@ const Home = () => {
                     }
                 }
             }`;
-
-            try {
-                const response = await axios.post(url, { query: featuredQuery }, { headers });
-                const fetchedProducts = response.data.data.collectionByHandle.products.edges.map(edge => ({
-                    ...edge.node,
-                    img: edge.node.images.edges[0].node.src,
-                    price: edge.node.priceRange.minVariantPrice.amount
-                }));
-                setProducts(fetchedProducts);
-                console.log('Featured Products:', fetchedProducts);
-            } catch (error) {
-                console.error('Error fetching featured products:', error);
-            }
 
             const clearanceQuery = `{
                 collectionByHandle(handle: "clearance") {
@@ -108,49 +96,136 @@ const Home = () => {
                 }
             }`;
 
+            const trendingQuery = `{
+                products(first: 100) {
+                    edges {
+                        node {
+                            id
+                            title
+                            description
+                            descriptionHtml
+                            productType
+                            tags
+                            vendor
+                            createdAt
+                            updatedAt
+                            collections(first: 5) {
+                                edges {
+                                    node {
+                                        title
+                                        id
+                                    }
+                                }
+                            }
+                            variants(first: 250) {
+                                edges {
+                                    node {
+                                        id
+                                        title
+                                        priceV2 {
+                                            amount
+                                            currencyCode
+                                        }
+                                        sku
+                                        availableForSale
+                                    }
+                                }
+                            }
+                            priceRange {
+                                minVariantPrice {
+                                    amount
+                                    currencyCode
+                                }
+                                maxVariantPrice {
+                                    amount
+                                    currencyCode
+                                }
+                            }
+                            images(first: 5) {
+                                edges {
+                                    node {
+                                        originalSrc
+                                        altText
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }`;
+
+            // Featured Products Fetch
+            try {
+                const response = await axios.post(url, { query: featuredQuery }, { headers });
+                const fetchedProducts = response.data.data.collectionByHandle.products.edges.map(edge => ({
+                    ...edge.node,
+                    img: edge.node.images.edges[0].node.src,
+                    price: edge.node.priceRange.minVariantPrice.amount
+                }));
+                setProducts(fetchedProducts);
+            } catch (error) {
+                console.error('Error fetching featured products:', error);
+            }
+
+            // Clearance Products Fetch
             try {
                 const clearanceResponse = await axios.post(url, { query: clearanceQuery }, { headers });
-                console.log(clearanceResponse.data);
                 const fetchedClearanceProducts = clearanceResponse.data.data.collectionByHandle.products.edges.map(edge => ({
                     ...edge.node,
-                    img: edge.node.featuredImage?.url, // Check if featuredImage exists
+                    img: edge.node.featuredImage?.url,
                     price: edge.node.priceRange.minVariantPrice.amount
                 }));
                 setClearanceProducts(fetchedClearanceProducts);
-                console.log('Clearance Products:', fetchedClearanceProducts);
             } catch (error) {
-                console.error('Error fetching clearance products:', error.response ? error.response.data : error.message);
+                console.error('Error fetching clearance products:', error);
+            }
+
+            // Trending Products Fetch
+            try {
+                const trendingResponse = await axios.post(url, { query: trendingQuery }, { headers });
+                const fetchedTrendingProducts = trendingResponse.data.data.products.edges.map(edge => ({
+                    ...edge.node,
+                    img: edge.node.images.edges[0]?.node.originalSrc,
+                    price: edge.node.priceRange.minVariantPrice.amount
+                }));
+                setTrendingProducts(fetchedTrendingProducts);
+            } catch (error) {
+                console.error('Error fetching trending products:', error);
             }
         };
 
         fetchData();
     }, []);
 
+
     console.log(clearanceProducts)
+    console.log(products)
+    console.log(trendingProducts)
 
     return(
         <>
-            <div className='bg-homePageColor'>
+           <div className='bg-homePageColor'>
                 <SideBar />
-                <div className='bg-homePageColor' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <img 
-                        src={goodOneDeals} 
-                        alt="Good One Deals" 
-                        style={{ width: '100vw', height: 'auto', margin: '0 auto 10px' }}
-                        className='mt-10 mb-5'
-                    />
-                </div>
+                <div style={{ height: "90vh", paddingBottom: "150px", overflowY: "auto" }}>
+                    <div className='bg-homePageColor' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <img 
+                            src={goodOneDeals} 
+                            alt="Good One Deals" 
+                            style={{ width: '100vw', height: 'auto', margin: '0 auto 10px' }}
+                            className='mt-1'
+                        />
+                    </div>
 
-
-                <p className='font-bold ml-10 mt-10 font-bold'>Featured</p>
-                <Products ProductArray={products} component="HomePage"/> 
-                <div style={{"marginBottom" : "130px"}}>
-                    <p className='font-bold ml-10 font-bold '>Clearance</p>
-                    <Products ProductArray={clearanceProducts} component="HomePage"/> 
+                    <p className='font-bold ml-10 mt-10 bg-homePageColor'>Featured</p>
+                    <Products ProductArray={products} component="HomePage"/> 
+                    <div style={{ marginBottom: "5px" }}>
+                        <p className='font-bold ml-10 bg-homePageColor'>Clearance</p>
+                        <Products ProductArray={clearanceProducts} component="HomePage"/> 
+                    </div>
                 </div>
-                
                 <Footer />
-            </div>
+          </div>
+
         </>
     );
 }

@@ -6,7 +6,7 @@ import SingleVariant from './SingleVariant';
 import './SingleProduct.css';
 
 const SingleFeaturedProduct = ({ product, style }) => {
-    const { cartItems, addToCartFromQuantityInput, removeFromCart, addToFavourites, removeFromFavourites } = useContext(CartContext);
+    const { cartItems, addToCartFromQuantityInput, removeFromCart, addToFavourites, removeFromFavourites, favourites } = useContext(CartContext);
     const [count, setCount] = useState(0);
     const [isLiked, setIsLiked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +14,13 @@ const SingleFeaturedProduct = ({ product, style }) => {
     const [productData, setProductData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+
+    useEffect(() => {
+        // Determine if the product is already a favorite
+        const isFavourite = favourites.some(fav => fav.merchandiseId === product.id);
+        setIsLiked(isFavourite);
+    }, [favourites, product.id]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -62,8 +69,9 @@ const SingleFeaturedProduct = ({ product, style }) => {
         };
 
         fetchData();
-        checkIfFavourited();
     }, [product.id]);
+
+   
 
     const checkIfFavourited = () => {
         // Assume a method to check if the product is already favourited
@@ -72,8 +80,9 @@ const SingleFeaturedProduct = ({ product, style }) => {
     };
 
     const toggleFavourite = () => {
-        setIsLiked(!isLiked);
-        if (!isLiked) {
+        const currentlyLiked = !isLiked;
+        setIsLiked(currentlyLiked);
+        if (currentlyLiked) {
             addToFavourites({
                 merchandiseId: productData?.variants.edges[0]?.node.id,
                 imageURL: product.img,
@@ -205,10 +214,13 @@ const SingleFeaturedProduct = ({ product, style }) => {
                 </div>
                 <img src={product.img} alt="Product" className='w-30 h-25' />
             </div>
-       <div className="w-full text-center mb-2">
-           <p className='text-xxs'>{product.title}</p>
-           <p className='text-md mt-8'>£{product.priceRange.minVariantPrice.amount}<span style={{"fontSize": "10px"}} className='text-gray'>(Excl. Tax)</span></p>
-       </div>
+            <div className="w-full text-center mb-2">
+                <p className='text-xxs'>{product.title}</p>
+                <p className='text-md mt-8'>
+                    £{product.priceRange.minVariantPrice.amount}
+                    <span style={{ fontSize: "10px", marginLeft: "2px" }} className='text-gray'> (Excl. Tax)</span>
+                </p>
+           </div>
        {variants && (
            <button
                className='text-white rounded mt-2 py-1 mx-auto mt-1'
@@ -250,11 +262,16 @@ const SingleFeaturedProduct = ({ product, style }) => {
                   -
               </button>
               <input 
-                  type="text"
-                  value={count}
-                  onChange={handleInputChange}
-                  className="w-12 text-center"
-              />
+            type="text"
+            value={count}
+            maxLength="3"
+            onChange={handleInputChange}
+            className="w-12 text-center"
+            inputMode="numeric"
+            pattern="\d*"
+            />
+
+
               <button
                   onClick={increment}
                   className="text-white font-bold rounded px-4 h-7"

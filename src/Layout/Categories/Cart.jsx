@@ -110,7 +110,6 @@ const Cart = () => {
                                         <div className="flex-1 ml-3">
                                             <p className='text-xxs text-darkGrey mt-1'>{item.title}</p>
                                             <p className='text-sm text-black mt-6'>£{item.price*item.quantity}</p> 
-                                            <p className='text-xxs text-darkGrey'>{item.description}</p> 
                                         </div>
                                     </div>
                                 </div>
@@ -149,12 +148,13 @@ const Cart = () => {
                     
                 </div>
                 <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4 border-b border-gray pb-3 shadow-top pt-2">
-                                        <div>
-                                            <p className='text-sm text-gray'>SKUs:</p>
-                                        </div>
-                                        <div>
-                                            <p className='text-sm text-gray'>{numberOfSKUs}</p>
-                                        </div>
+              
+                    <p className='text-sm text-gray' style={{"fontWeight" : "bolder"}}>SKUs:</p>
+                    <p className='text-sm text-gray' style={{"fontWeight" : "bolder"}}>{numberOfSKUs}</p>
+        
+
+
+                                        
                     </div>
                      <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4  pb-3 shadow-top pt-2">
                     <div>
@@ -174,7 +174,7 @@ const Cart = () => {
                                 Clear
                             </button>
                             <button className='w-full md:w-1/2 px-10 py- border border-red-500 rounded-full text-white mb-2 md:mb-0 md:mr-1' onClick={handleCheckout} style={{"backgroundColor" : "#C71313"}}>
-                                Go To CheckOut
+                                Go To Checkout
                             </button>
                         </div>
                     </div>

@@ -9,8 +9,11 @@ const Brand = () => {
     const [brands, setBrands] = useState([]);
     const [filteredBrands, setFilteredBrands] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const [selectedBrandId, setSelectedBrandId] = useState(localStorage.getItem('selectedBrandId') || '');
 
     useEffect(() => {
+      
+
         const fetchBrands = async () => {
             const url = 'https://881ccd-2.myshopify.com/api/2024-04/graphql.json';
             const headers = {
@@ -34,7 +37,13 @@ const Brand = () => {
             }
         };
 
-        fetchBrands();
+    
+        fetchBrands().then(() => {
+            // Ensure setSelectedBrandId is called after brands are fetched
+            if (localStorage.getItem('selectedBrandId')) {
+                setSelectedBrandId(localStorage.getItem('selectedBrandId'));
+            }
+        });
     }, []);
 
     useEffect(() => {
@@ -46,14 +55,16 @@ const Brand = () => {
 
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
+        localStorage.setItem('selectedBrand', event.target.value);  // Update localStorage when search changes
     };
 
     const handleClearSearch = () => {
         setSearchValue('');
+        localStorage.removeItem('selectedBrand');  // Clear localStorage when search is cleared
     };
 
-    console.log(brands)
 
+    console.log(selectedBrandId)
     return (
         <>
             <div className='homePageColor'>
@@ -77,11 +88,12 @@ const Brand = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10 overflow-auto pb-40 pt-5 mx-auto"
-                    style={{ height: 'auto', width: '95%', margin: '0 20px' }}>
+                    style={{ height: '80vh', width: '95%', margin: '0 20px' }}>
                     {filteredBrands.map((brand, index) => (
-                        <SingleBrand key={index} brand={brand} />
+                        <SingleBrand key={index} brand={brand} isSelected={selectedBrandId === brand.id} onSelect={setSelectedBrandId} />
                     ))}
                 </div>
+
 
                 <Footer formPage="brandPage" />
             </div>

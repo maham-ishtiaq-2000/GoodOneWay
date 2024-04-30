@@ -9,6 +9,7 @@ import SearchBar from '../ReusableComponent/SearchBar';
 const Categories = () => {
     const [categories, setCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [visitedCategoryId, setVisitedCategoryId] = useState(localStorage.getItem('visitedCategoryId') || '');
     
 
     useEffect(() => {
@@ -79,7 +80,7 @@ const Categories = () => {
                 </div>
                 <div className="overflow-auto mb-5 pb-10 ml-5 mr-5" style={{ height: '80vh' }}>
                     {filteredCategories.map((category, index) => (
-                        <SingleCategory key={index} category={category}  />
+                        <SingleCategory key={index} category={category} isVisited={visitedCategoryId === category.id} onVisit={() => setVisitedCategoryId(category.id)} />
                     ))}
                 </div>
                 <Footer formPage="CategoriesPage" />

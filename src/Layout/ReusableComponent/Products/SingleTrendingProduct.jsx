@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React,{useState,useContext,useEffect} from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import SingleVariant from './SingleVariant';
 import { CartContext } from '../../../Layout/context/CartContext';
 import './SingleProduct.css';
 
-const SingleProduct = ({ product }) => {
-    const { cartItems, addToCart, addToCartFromQuantityInput, removeFromCart, addToFavourites, removeFromFavourites, favourites } = useContext(CartContext);
+const SingleTrendingProduct = ({product}) => {
+    const { cartItems, addToCart, addToCartFromQuantityInput, removeFromCart } = useContext(CartContext);
     const [count, setCount] = useState(0);
     const [isLiked, setIsLiked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,12 +20,6 @@ const SingleProduct = ({ product }) => {
             setCount(0);
         }
     }, [cartItems, product.variants.edges]);
-
-    useEffect(() => {
-        const isFavorited = favourites.some(item => item.merchandiseId === product.variants.edges[0].node.id);
-        setIsLiked(isFavorited);
-    }, [favourites, product.variants.edges]);
-    
 
     const increment = () => {
         const newCount = count + 1;
@@ -72,48 +66,29 @@ const SingleProduct = ({ product }) => {
         }
     };
 
-    const toggleFavourite = () => {
-        setIsLiked(!isLiked);
-        if (!isLiked) {
-            addToFavourites({
-                merchandiseId: product.variants.edges[0].node.id,
-                imageURL: product.featuredImage.url,
-                title: product.title,
-                description: product.description,
-                price: product.priceRange.maxVariantPrice.amount
-            });
-        } else {
-            removeFromFavourites(product.variants.edges[0].node.id);
-        }
-    };
-    
-
     const toggleModal = () => setIsModalOpen(!isModalOpen);
     const modalClass = isClosing ? 'modal-disappear' : 'modal-appear';
     const variants = product.variants.edges.map(edge => edge.node);
-
-    return (
-        <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-1 relative" 
-        style={{ width: "180px", height: "350px", boxSizing: 'border-box',  margin: '0 20px' }}>
-            <div className="w-full relative">
-                <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
-                    {isLiked ? (
-                        <AiFillHeart size={24} color="red" onClick={toggleFavourite} />
-                    ) : (
-                        <AiOutlineHeart size={24} color="red" onClick={toggleFavourite} />
-                    )}
-                </div> 
-                <img src={product.featuredImage.url} alt="Product" className='w-30 h-25' />
-            </div>
-            <div className="w-full text-center mb-2">
-                <p className='text-xxs'>{product.title}</p>
-                <p className='text-md mt-8'>
-                    £{product.priceRange.maxVariantPrice.amount}
-                    <span style={{ fontSize: "10px", marginLeft: "2px" }} className='text-gray'> (Excl. Tax)</span>
-                </p>
-            </div>
-
-            {!variants || variants.length !== 1 && (
+    console.log(variants)
+    return(
+        <>
+           <div className="flex flex-col justify-start border border-lightGray border-2 bg-white rounded-lg px-1 relative" 
+            style={{ width: "180px", height: "350px", boxSizing: 'border-box',  margin: '0 20px' }}>
+                <div className="w-full relative">
+                    <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
+                        {isLiked ? (
+                            <AiFillHeart size={24} color="red" onClick={() => setIsLiked(false)} />
+                        ) : (
+                            <AiOutlineHeart size={24} color="red" onClick={() => setIsLiked(true)} />
+                        )}
+                    </div>
+                    <img src={product.img} alt="Product" className='w-30 h-25' />
+                </div>
+                <div className="w-full text-center mb-2">
+                    <p className='text-xxs'>{product.title}</p>
+                    <p className='text-md mt-8'>£{product.price}<span style={{"fontSize": "10px"}} className='text-gray'>(Excl. Tax)</span></p>
+                </div>
+                {!variants || variants.length !== 1 && (
                 <button className='text-white rounded mt-2 py-1 mx-auto mt-1' onClick={toggleModal}
                     style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' ,"backgroundColor" : "#C71313"}}>
                     Select Variant
@@ -139,12 +114,14 @@ const SingleProduct = ({ product }) => {
             {!variants || variants.length === 1 && (
                 <div className="flex items-center justify-center space-x-2 mt-1"  style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}>
                     <button onClick={decrement} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>-</button>
-                    <input type="text" value={count} onChange={handleInputChange}  maxLength="3" className="w-12 text-center" />
+                    <input type="text" value={count} onChange={handleInputChange} className="w-12 text-center" />
                     <button onClick={increment} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>+</button>
                 </div>
             )}
-        </div>
-    );
+            
+            </div>
+        </>
+    )
 }
 
-export default SingleProduct;
+export default SingleTrendingProduct;
