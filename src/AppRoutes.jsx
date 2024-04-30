@@ -26,6 +26,7 @@ const AppRoutes = () => {
         <Routes>
             {/* Redirect based on authentication status */}
             <Route path="/" element={isAuthenticated() ? <Navigate to="/home" replace /> : <Login />} />
+            <Route path="/Login" element={Login}></Route>
             <Route path="/home" element={
                 <ProtectedRoute>
                     <Home />

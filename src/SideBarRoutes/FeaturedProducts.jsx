@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import SideBar from '../Layout/SideBar/SideBar';
 import Footer from '../Layout/Footer/Footer';
-import Products from '../Layout/ReusableComponent/Products/Products';
+import SingleFeaturedProduct from '../Layout/ReusableComponent/Products/SingleFeaturedProduct';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import axios from 'axios';
 
@@ -111,9 +111,17 @@ const FeaturedProducts = () => {
                         </div>
                     </div>
                 </div>
-                <div style={{"height" : "100vh"}}>
-                    <Products ProductArray={filteredProducts} component="HomePage"/> 
+                <div className='mb-10 pl-5' style={{ height: "70vh", overflowY: "auto" }}>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 py-4"
+                        style={{ height: 'auto', width: '90%', margin: '0 10px', overflowX: 'hidden' }}>
+                        {filteredProducts.map((product, index) => (
+                            <SingleFeaturedProduct key={index} product={product} />
+                        ))}
+                    </div>
                 </div>
+
+               
+                
                 <Footer />
             </div>
         </>

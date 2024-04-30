@@ -39,78 +39,82 @@ const Footer = ({ formPage }) => {
 
             <div className="border-t border-gray w-full mb-2 pb-1"></div>
 
-            <div className="flex flex-row justify-between items-center lg:px-40">
-                <button className="block" onClick={() => navigate('/brand')}>
-                    <FaRegBuilding
-                        className={`ml-4 w-10 h-5 ${
-                            isActive('/brand') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    />
-                    <span
-                        className={`text-sm font-semibold ${
-                            isActive('/brand') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    >
-                        Brands
-                    </span>
-                </button>
-                <button className="block" onClick={() => navigate('/categories')}>
-                    <FaTags
-                        className={`mx-auto w-10 h-5 ${
-                            isActive('/categories') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    />
-                    <span
-                        className={`text-sm font-semibold ${
-                            isActive('/categories') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    >
-                        Categories
-                    </span>
-                </button>
-                <button className="block" onClick={() => navigate('/home')}>
-                    <FaHome
-                        className={`ml-3 w-10 h-5 ${
-                            isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    />
-                    <span
-                        className={`text-sm font-semibold ${
-                            isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    >
-                        Home
-                    </span>
-                </button>
-                <button className="block" onClick={() => navigate('/searchPage')}>
-                    <FaSearch
-                        className={`w-10 h-5 ml-3 ${
-                            isActive('/searchPage') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    />
-                    <span
-                        className={`text-sm font-semibold ${
-                            isActive('/searchPage') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    >
-                        Search
-                    </span>
-                </button>
-                <button className="block mr-5" onClick={() => navigate('/cart')}>
-                    <FaCartArrowDown
-                        className={`mx-auto w-10 h-5 ml-2 ${
-                            isActive('/cart') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    />
-                    <span
-                        className={`text-sm font-semibold ${
-                            isActive('/cart') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
-                        }`}
-                    >
-                        Cart
-                    </span>
-                </button>
+            <div className="relative lg:px-40 py-auto" style={{ height: '80px' }}> {/* Ensure adequate height for the nav bar */}
+
+                <div className="flex justify-between items-center absolute inset-0">
+                    <button className="block block absolute -translate-x-1/2 top-1/2 -translate-y-1/2"style={{ left: '10%' }}  onClick={() => navigate('/brand')}>
+                        <FaRegBuilding
+                            className={`ml-4 w-10 h-5 ${
+                                isActive('/brand') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        />
+                        <span
+                            className={`text-sm font-semibold ${
+                                isActive('/brand') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        >
+                            Brands
+                        </span>
+                    </button>
+                    <button className="block block absolute -translate-x-1/2 top-1/2 -translate-y-1/2" style={{ left: '30%' }} onClick={() => navigate('/categories')}>
+                        <FaTags
+                            className={`mx-auto w-10 h-5 ${
+                                isActive('/categories') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        />
+                        <span
+                            className={`text-sm font-semibold ${
+                                isActive('/categories') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        >
+                            Categories
+                        </span>
+                    </button>
+                    <button className="block absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2" onClick={() => navigate('/home')}>
+                        <FaHome
+                            className={`ml-3 w-10 h-5  ${
+                                isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        />
+                        <span
+                            className={`text-sm font-semibold ${
+                                isActive('/home') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        >
+                            Home
+                        </span>
+                    </button>
+                    <button className="block block absolute  top-1/2  -translate-y-1/2" onClick={() => navigate('/searchPage')}  style={{ right: '23%' }}>
+                        <FaSearch
+                            className={`w-10 h-5 ml-3 ${
+                                isActive('/searchPage') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        />
+                        <span
+                            className={`text-sm font-semibold ${
+                                isActive('/searchPage') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        >
+                            Search
+                        </span>
+                    </button>
+                    <button className="block mr-5 block absolute right-1  top-1/2 -translate-y-1/2" onClick={() => navigate('/cart')}>
+                        <FaCartArrowDown
+                            className={`mx-auto w-10 h-5 ml-2 ${
+                                isActive('/cart') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        />
+                        <span
+                            className={`text-sm font-semibold ${
+                                isActive('/cart') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
+                            }`}
+                        >
+                            Cart
+                        </span>
+                    </button>
+                </div>
             </div>
+
         </footer>
     );
 };

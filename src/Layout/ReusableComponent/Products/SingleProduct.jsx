@@ -93,18 +93,18 @@ const SingleProduct = ({ product }) => {
     const variants = product.variants.edges.map(edge => edge.node);
 
     return (
-        <div className="flex flex-col items-center justify-center border border-lightGray border-2 bg-white rounded-lg px-1 relative" 
-        style={{ width: "170px", height: "350px", boxSizing: 'border-box',  margin: '0 20px' }}>
-            <div className="w-full relative">
-                <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
-                    {isLiked ? (
-                        <AiFillHeart size={24} color="red" onClick={toggleFavourite} />
+      <>
+         <div className="relative border border-lightGray border-2 " style={{ width: '180px', height: '300px', overflow: 'hidden' }}>
+         {isLiked ? (
+                        <AiFillHeart className="absolute top-0 right-0 text-red-500 text-3xl" color="red" onClick={toggleFavourite} style={{"cursor" : "pointer"}}/>
                     ) : (
-                        <AiOutlineHeart size={24} color="red" onClick={toggleFavourite} />
+                        <AiOutlineHeart  className="absolute top-0 right-0 text-red-500 text-3xl" color="red" onClick={toggleFavourite} style={{"cursor" : "pointer"}}/>
                     )}
-                </div> 
-                <img src={product.featuredImage.url} alt="Product" className='w-30 h-25' />
-            </div>
+            <img 
+                src={product.featuredImage.url} // URL of the image
+                alt="Placeholder"
+                className="w-36 h-36 mx-auto" // Tailwind CSS classes for width and height (9rem or 144px by default)
+            />
             <div className="w-full text-center mb-2">
                 <p className='text-xxs'>{product.title}</p>
                 <p className='text-md mt-8'>
@@ -112,13 +112,17 @@ const SingleProduct = ({ product }) => {
                     <span style={{ fontSize: "10px", marginLeft: "2px" }} className='text-gray'> (Excl. Tax)</span>
                 </p>
             </div>
+            
+            {(!variants || variants.length !== 1) && (
+                    <button 
+                        className='text-white rounded mx-auto absolute bottom-2 left-1/2 py-1 transform -translate-x-1/2 bg-red-600'
+                        style={{ width: '90%', backgroundColor: "#C71313" }}
+                        onClick={toggleModal}
+                    >
+                        Select Variant
+                    </button>
+                )}
 
-            {!variants || variants.length !== 1 && (
-                <button className='text-white rounded mt-2 py-1 mx-auto mt-1' onClick={toggleModal}
-                    style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' ,"backgroundColor" : "#C71313"}}>
-                    Select Variant
-                </button>
-            )}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full" style={{ zIndex: 1050 }} onClick={() => setIsModalOpen(false)}>
                     <div className={`relative top-20 mx-auto p-5 border w-11/12 md:max-w-xl lg:max-w-2xl bg-white rounded-md shadow-lg ${modalClass}`}
@@ -137,13 +141,43 @@ const SingleProduct = ({ product }) => {
                 </div>
             )}
             {!variants || variants.length === 1 && (
-                <div className="flex items-center justify-center space-x-2 mt-1"  style={{ width : '90%', position: 'absolute', bottom: '5px', left: '5', right: '5' }}>
-                    <button onClick={decrement} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>-</button>
-                    <input type="text" value={count} onChange={handleInputChange}  id="numericInput" inputMode="numeric" maxLength="3" className="w-12 text-center" />
-                    <button onClick={increment} className="text-white font-bold rounded px-4 h-7" type="button" style={{"backgroundColor" : "#C71313"}}>+</button>
+                    <div 
+                    className="flex items-center justify-center space-x-2 absolute bottom-2 left-1/2 transform -translate-x-1/2"
+                    style={{ width: '90%' }}
+                >
+                    <button 
+                        onClick={decrement} 
+                        className="text-white font-bold rounded px-4 h-7"
+                        style={{ backgroundColor: "#C71313" }}
+                        type="button"
+                    >
+                        -
+                    </button>
+                    <input 
+                        type="text" 
+                        value={count} 
+                        onChange={handleInputChange}  
+                        id="numericInput" 
+                        inputMode="numeric" 
+                        maxLength="3" 
+                        className="w-12 text-center"
+                    />
+                    <button 
+                        onClick={increment} 
+                        className="text-white font-bold rounded px-4 h-7"
+                        style={{ backgroundColor: "#C71313" }}
+                        type="button"
+                    >
+                        +
+                    </button>
                 </div>
+            
             )}
+
+
         </div>
+
+      </>
     );
 }
 

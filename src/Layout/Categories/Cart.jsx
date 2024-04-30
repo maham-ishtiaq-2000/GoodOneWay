@@ -180,16 +180,19 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row w-9/10 space-y-4 space-x-1 md:space-y-0">
-                        <div className="md:w-full flex">
-                            <button className='w-full md:w-1/2 px-10 py- bg-platinum border border-red-500 rounded-full text-red-500 mb-2 md:mb-0 md:mr-1' onClick={handleClearCart}>
-                                Clear
-                            </button>
-                            <button className='w-full md:w-1/2 px-10 py- border border-red-500 rounded-full text-white mb-2 md:mb-0 md:mr-1' onClick={handleCheckout} style={{"backgroundColor" : "#C71313"}}>
-                                Go To Checkout
-                            </button>
-                        </div>
+            
+
+                    <div className="ixed w-9/10 flex flex-rpw md:flex-row items-center justify-center" style={{ bottom: '10%' }} >
+                        <button className='w-full md:w-1/2 px-10 py-2 bg-platinum border border-red-500 rounded-full text-red-500 mb-2 md:mb-0 md:mr-1' onClick={handleClearCart}>
+                            Clear
+                        </button>
+                        <button className='w-full md:w-1/2 px-10 py-2 bg-red-500 border border-red-500 rounded-full text-white mb-2 md:mb-0 md:ml-1' onClick={handleCheckout}>
+                            Go To Checkout
+                        </button>
                     </div>
+                
+
+
 
 
                     {cartItems.length > 0 && showConfirmationModal && (

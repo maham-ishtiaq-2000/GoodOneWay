@@ -203,7 +203,7 @@ const SingleFeaturedProduct = ({ product, style }) => {
 
     return (
         <div className="flex flex-col items-center justify-start border border-lightGray border-2 bg-white rounded-lg px-2 relative" 
-        style={{ width: "160px", height: "350px", boxSizing: 'border-box' }}>
+        style={{ width: "160px", height: "270px", boxSizing: 'border-box' }}>
            <div className="w-full relative">
                 <div className="absolute top-0 right-0 p-1" style={{ cursor: 'pointer' }}>
                     {isLiked ? (
@@ -216,7 +216,7 @@ const SingleFeaturedProduct = ({ product, style }) => {
             </div>
             <div className="w-full text-center mb-2">
                 <p className='text-xxs'>{product.title}</p>
-                <p className='text-md mt-8'>
+                <p className='text-md mt-1'>
                     £{product.priceRange.minVariantPrice.amount}
                     <span style={{ fontSize: "10px", marginLeft: "2px" }} className='text-gray'> (Excl. Tax)</span>
                 </p>
@@ -233,7 +233,7 @@ const SingleFeaturedProduct = ({ product, style }) => {
        )}
        {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full" style={{ zIndex: 1050 }} onClick={closeModal}>
-               <div className={`relative top-20 mx-auto p-5 border w-11/12 md:max-w-xl lg:max-w-2xl bg-white rounded-md shadow-lg ${modalClass}`}
+               <div className={`relative top-15 mx-auto p-5 border w-11/12 md:max-w-xl lg:max-w-2xl bg-white rounded-md shadow-lg ${modalClass}`}
                     style={{ zIndex: 1051 }}
                     onClick={(e) => e.stopPropagation()}>
                    <div className="mt-3 text-center">
