@@ -58,7 +58,7 @@ const Footer = ({ formPage }) => {
                     </button>
                     <button className="block block absolute -translate-x-1/2 top-1/2 -translate-y-1/2" style={{ left: '30%' }} onClick={() => navigate('/categories')}>
                         <FaTags
-                            className={`mx-auto w-10 h-5 ${
+                            className={`ml-7 w-10 h-5 ${
                                 isActive('/categories') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
                             }`}
                         />
@@ -86,7 +86,7 @@ const Footer = ({ formPage }) => {
                     </button>
                     <button className="block block absolute  top-1/2  -translate-y-1/2" onClick={() => navigate('/searchPage')}  style={{ right: '23%' }}>
                         <FaSearch
-                            className={`w-10 h-5 ml-3 ${
+                            className={`w-10 h-5 ml-4 ${
                                 isActive('/searchPage') ? 'text-red-500 text-2xl font-bold' : 'text-gray'
                             }`}
                         />

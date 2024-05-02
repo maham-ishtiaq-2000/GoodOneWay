@@ -105,7 +105,7 @@ const Cart = () => {
         <>
             <div className='CartPageColor'>
                 <SideBar />
-                <div className="overflow-auto mb-8 mx-2" style={{ height: '63vh' }}>
+                <div className="overflow-auto mb-8 mx-2" style={{ height: '57vh' }}>
                     {cartItems.map((item, index) => (
                         <div className={`flex w-full ${index % 2 === 0 ? 'bg-platinum' : 'bg-white'}`} key={item.merchandiseId}>
                             <div className={`w-4/5 ${index % 2 === 0 ? 'bg-platinum' : 'bg-white'}`}>
@@ -121,7 +121,8 @@ const Cart = () => {
                                         </div>
                                         <div className="flex-1 ml-3">
                                             <p className='text-xxs text-darkGrey mt-1'>{item.title}</p>
-                                            <p className='text-sm text-black mt-6'>£{item.price*item.quantity}</p> 
+                                            <p className='text-sm text-black mt-6'>£{item.price*item.quantity}</p>
+                                            <p className='text-darkGrey' style={{"fontSize" : "12px"}}>Excl. VAT</p> 
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +160,7 @@ const Cart = () => {
 
                     
                 </div>
-                <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4 border-b border-gray pb-3 shadow-top pt-2">
+                <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4 pb-3 shadow-top pt-2">
               
                     <p className='text-sm text-gray' style={{"fontWeight" : "bolder"}}>SKUs:</p>
                     <p className='text-sm text-gray' style={{"fontWeight" : "bolder"}}>{numberOfSKUs}</p>
@@ -168,7 +169,7 @@ const Cart = () => {
 
                                         
                     </div>
-                     <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4  pb-3 shadow-top pt-2">
+                     <div className="flex justify-between items-center w-full px-4 md:px-8 lg:px-4  pb-3  pt-2">
                     <div>
                         <p className='text-md font-semibold text-black'>
                             Total :<span className='text-xs font-normal mr-20 text-gray'>(Excl. Tax)</span>
@@ -182,7 +183,7 @@ const Cart = () => {
 
             
 
-                    <div className="ixed w-9/10 flex flex-rpw md:flex-row items-center justify-center" style={{ bottom: '10%' }} >
+                    <div className="ixed w-9/10 flex flex-rpw md:flex-row items-center justify-center mx-2 mt-2" style={{ bottom: '15%' }} >
                         <button className='w-full md:w-1/2 px-10 py-2 bg-platinum border border-red-500 rounded-full text-red-500 mb-2 md:mb-0 md:mr-1' onClick={handleClearCart}>
                             Clear
                         </button>

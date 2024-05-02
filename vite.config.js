@@ -8,34 +8,17 @@ export default defineConfig({
     react(), 
     VitePWA({ 
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg', 'cartIcon.png'],
       manifest: {
-        name: 'Vite PWA Project',
-        short_name: 'Vite PWA Project',
+        name: 'Good One Deals',
+        short_name: 'Good One Deals',
         theme_color: '#ffffff',
         icons: [
             {
-                src: 'pwa-64x64.png',
-                sizes: '64x64',
+                src: 'cartIcon.png',
+                sizes: '92*92',
                 type: 'image/png'
             },
-            {
-                src: 'pwa-192x192.png',
-                sizes: '192x192',
-                type: 'image/png'
-            },
-            {
-                src: 'pwa-512x512.png',
-                sizes: '512x512',
-                type: 'image/png',
-                purpose: 'any'
-            },
-            {
-                src: 'maskable-icon-512x512.png',
-                sizes: '512x512',
-                type: 'image/png',
-                purpose: 'maskable'
-            }
         ],
       }, 
     })

@@ -9,7 +9,7 @@ const Brand = () => {
     const [brands, setBrands] = useState([]);
     const [filteredBrands, setFilteredBrands] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-    const [selectedBrandId, setSelectedBrandId] = useState(localStorage.getItem('selectedBrandId') || '');
+   
 
     useEffect(() => {
       
@@ -38,12 +38,7 @@ const Brand = () => {
         };
 
     
-        fetchBrands().then(() => {
-            // Ensure setSelectedBrandId is called after brands are fetched
-            if (localStorage.getItem('selectedBrandId')) {
-                setSelectedBrandId(localStorage.getItem('selectedBrandId'));
-            }
-        });
+        fetchBrands()
     }, []);
 
     useEffect(() => {
@@ -64,7 +59,7 @@ const Brand = () => {
     };
 
 
-    console.log(selectedBrandId)
+
     return (
         <>
             <div className='homePageColor'>
@@ -87,12 +82,15 @@ const Brand = () => {
                         )}
                     </div>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-10  pb-40 pt-5 mx-auto"
-                    style={{ height: '80vh', width: '90%', margin: '0 20px' }}>
-                    {filteredBrands.map((brand, index) => (
-                        <SingleBrand key={index} brand={brand} isSelected={selectedBrandId === brand.id} onSelect={setSelectedBrandId} />
-                    ))}
-                </div>
+               
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-3 ml-7"
+                        style={{ paddingBottom: '1rem' , width : '90%' , height : '70vh' , overflowY : 'auto' }}>
+                        {filteredBrands.map((brand, index) => (
+                            <SingleBrand key={index} brand={brand} />
+                        ))}
+                    </div>
+               
+
 
 
                 <Footer formPage="brandPage" />

@@ -112,7 +112,7 @@ const ClearanceProducts = () => {
                     </div>
                 </div>
      
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 py-4  pb-40 items-center justify-center" style={{ height: '50vh', margin: '0 10px' , width : '90%' }}>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 py-8  pb-40 items-center justify-center mx-auto" style={{ height: '50vh' , width : '75%' }}>
                     {filteredProducts.map((product, index) => (
                         <SingleFeaturedProduct key={index} product={product} />
                     ))}

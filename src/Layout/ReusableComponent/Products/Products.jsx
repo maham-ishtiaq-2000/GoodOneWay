@@ -12,7 +12,7 @@ const Products = ({ ProductArray, component , productsArray}) => {
       <div className='bg-homePageColor px-4'>
         {/* Only render the grid if it's not the HomePage */}
         {isNotHomePage && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 py-4  pb-40" style={{ height: '85vh', margin: '0 10px' }}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 py-4 gap-y-3  pb-40" style={{ height: '85vh', margin: '0 10px' }}>
             {ProductArray.map((product, index) => (
               <SingleProduct key={index} product={product} />
             ))}

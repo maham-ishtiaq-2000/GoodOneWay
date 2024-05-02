@@ -111,13 +111,10 @@ const FeaturedProducts = () => {
                         </div>
                     </div>
                 </div>
-                <div className='mb-10 pl-5' style={{ height: "70vh", overflowY: "auto" }}>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 py-4"
-                        style={{ height: 'auto', width: '90%', margin: '0 10px', overflowX: 'hidden' }}>
-                        {filteredProducts.map((product, index) => (
-                            <SingleFeaturedProduct key={index} product={product} />
-                        ))}
-                    </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-1 py-8  pb-40 items-center justify-center mx-auto" style={{ height: '78vh' , width : '75%' , overflowY : 'auto' }}>
+                    {filteredProducts.map((product, index) => (
+                        <SingleFeaturedProduct key={index} product={product} />
+                    ))}
                 </div>
 
                

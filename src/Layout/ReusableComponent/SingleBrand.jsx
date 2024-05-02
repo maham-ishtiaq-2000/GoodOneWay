@@ -9,15 +9,13 @@ const SingleBrand = ({ brand, isSelected, onSelect }) => {
   const navigateToProducts = () => {
     navigate(`/searchPage/${brand.title}`);
     onSelect(brand.id);  // Set this brand as selected
-    localStorage.setItem('selectedBrandId', brand.id);  // Store selected brand ID in localStorage
   };
 
-  // Updated background colors for better contrast and visibility
-  const backgroundColor = isSelected ? '#FFEAE9' : 'white';  // Using Hex codes for gray and dark gray
+
 
   return (
     <div 
-      style={{ width: "180px", margin: "0 20px", cursor: 'pointer', backgroundColor }}
+      style={{ width: "180px", cursor: 'pointer' }}
       className="flex justify-center items-center"
       onClick={navigateToProducts}
     >

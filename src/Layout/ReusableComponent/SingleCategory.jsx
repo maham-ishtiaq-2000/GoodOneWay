@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const SingleCategory = ({ category, isVisited, onVisit }) => {
+const SingleCategory = ({ category }) => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     console.log(category)
@@ -107,13 +107,13 @@ const SingleCategory = ({ category, isVisited, onVisit }) => {
         localStorage.setItem('visitedCategoryId', category.id);
     };
 
-    const backgroundColor = isVisited ? '#FFEAE9' : 'white'; 
+   
 
     return (
         <div
         className={`bg-white border-2 border-red-500 rounded-lg p-2 flex justify-between items-center mx-auto w-9/10 max-w-[165vh] pt-3 pb-3 mb-2`}
         onClick={navigateToProducts}
-        style={{ cursor: 'pointer', height: '100px' ,backgroundColor  }}
+        style={{ cursor: 'pointer', height: '100px'}}
         >
             <div className="flex-1" style={{ flexBasis: '20%' }}>
                 <img

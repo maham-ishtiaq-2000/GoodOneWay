@@ -9,7 +9,7 @@ import SearchBar from '../ReusableComponent/SearchBar';
 const Categories = () => {
     const [categories, setCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [visitedCategoryId, setVisitedCategoryId] = useState(localStorage.getItem('visitedCategoryId') || '');
+   
     
 
     useEffect(() => {
@@ -58,7 +58,7 @@ const Categories = () => {
         <>
             <div className='homePageColor'>
                 <SideBar />
-                <div className="flex justify-center items-center w-full pl-7 pr-7 mb-5">
+                <div className="flex justify-center items-center w-full pl-7 pr-7">
                     <div className="w-full top-2 left-0 z-10">
                         <div className="flex items-center justify-center w-full">
                             <div className="relative w-full">
@@ -78,9 +78,9 @@ const Categories = () => {
                         </div>
                     </div>
                 </div>
-                <div className="overflow-auto mb-5 pb-10 ml-5 mr-5" style={{ height: '80vh' }}>
+                <div className="overflow-auto mb-5 pb-20 pt-5 ml-5 mr-5" style={{ height: '80vh' }}>
                     {filteredCategories.map((category, index) => (
-                        <SingleCategory key={index} category={category} isVisited={visitedCategoryId === category.id} onVisit={() => setVisitedCategoryId(category.id)} />
+                        <SingleCategory key={index} category={category} />
                     ))}
                 </div>
                 <Footer formPage="CategoriesPage" />
